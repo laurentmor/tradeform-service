@@ -1,13 +1,13 @@
 package com.lm.tradeformservice.dto;
 
-public enum TradeformStatus {
+public enum TradeFormStatus {
     PENDING("Pending"),
     APPROVED("Approved"),
     REJECTED("Rejected");
 
     private final String displayName;
 
-    TradeformStatus(String displayName) {
+    TradeFormStatus(String displayName) {
         this.displayName = displayName;
     }
 

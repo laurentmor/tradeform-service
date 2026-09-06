@@ -1,9 +1,9 @@
 package com.lm.tradeformservice.dto;
 
-public record Tradeform(int id,TradeformStatus status) {
-    public Tradeform {
+public record TradeForm(int id, TradeFormStatus status) {
+    public TradeForm {
         if (id < 0) {
-            throw new IllegalArgumentException("Tradeform ID cannot be negative");
+            throw new IllegalArgumentException("TradeForm ID cannot be negative");
         }
     }
 }

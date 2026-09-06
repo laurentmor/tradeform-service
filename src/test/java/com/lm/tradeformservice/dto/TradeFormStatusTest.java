@@ -5,21 +5,21 @@ import org.junit.jupiter.api.Test;
 public class TradeFormStatusTest {
     @Test
     public void testGetDisplayNamePending() {
-        TradeformStatus status = TradeformStatus.PENDING;
+        TradeFormStatus status = TradeFormStatus.PENDING;
         String displayName = status.getDisplayName();
         Assertions.assertEquals("Pending", displayName);
     }
 
     @Test
     public void testGetDisplayNameApproved() {
-        TradeformStatus status = TradeformStatus.APPROVED;
+        TradeFormStatus status = TradeFormStatus.APPROVED;
         String displayName = status.getDisplayName();
         Assertions.assertEquals("Approved", displayName);
     }
 
     @Test
     public void testGetDisplayNameRejected() {
-        TradeformStatus status = TradeformStatus.REJECTED;
+        TradeFormStatus status = TradeFormStatus.REJECTED;
         String displayName = status.getDisplayName();
         Assertions.assertEquals("Rejected", displayName);
     }
