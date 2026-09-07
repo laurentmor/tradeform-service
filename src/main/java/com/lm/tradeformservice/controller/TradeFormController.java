@@ -7,12 +7,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 
-import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import org.springframework.http.ResponseEntity;
 
 @RestController 
 public class TradeFormController {
+    private final JsonMapper jsonMapper;
+
+    public TradeFormController(JsonMapper jsonMapper) {
+        this.jsonMapper = jsonMapper;
+    }
+
     /**
      * GET endpoint to check if the TradeForm Service is running
      * @return ResponseEntity with a message indicating the service is running
@@ -29,13 +35,14 @@ public class TradeFormController {
      */
     @GetMapping("/api/tradeforms/{id}") 
     public ResponseEntity<String> getTradeFormById(@PathVariable String id) {
-        TradeForm tradeForm = new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
         //TODO: Move the ObjectMapper to a service class and use it to convert the TradeForm object to JSON
 
-        ObjectMapper jsonMapper = new ObjectMapper();
         try {
+            TradeForm tradeForm = new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
             String jsonResponse = jsonMapper.writeValueAsString(tradeForm);
             return ResponseEntity.ok(jsonResponse);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid TradeForm ID");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error converting TradeForm to JSON");
         }
