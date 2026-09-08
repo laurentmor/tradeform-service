@@ -11,7 +11,7 @@ import tools.jackson.databind.json.JsonMapper;
 
 import org.springframework.http.ResponseEntity;
 
-@RestController 
+@RestController("basicTradeFormController") 
 public class TradeFormController {
     private final JsonMapper jsonMapper;
 
@@ -46,8 +46,6 @@ public class TradeFormController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error converting TradeForm to JSON");
         }
-
-       
     }
 
 }

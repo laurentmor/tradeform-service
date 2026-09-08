@@ -1,16 +1,19 @@
 package com.lm.tradeformservice.controller;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+
 import com.lm.tradeformservice.dto.TradeForm;
+
 import tools.jackson.databind.json.JsonMapper;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,6 +35,7 @@ public class TradeFormControllerTests {
 
     @BeforeEach
     public void setUp() throws Exception {
+        reset(jsonMapper);
         when(jsonMapper.writeValueAsString(any(TradeForm.class)))
                 .thenReturn("{\"id\":1,\"status\":\"PENDING\"}");
     }
