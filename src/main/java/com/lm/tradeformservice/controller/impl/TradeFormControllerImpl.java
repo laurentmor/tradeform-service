@@ -1,9 +1,10 @@
-package com.lm.tradeformservice.controller;
+package com.lm.tradeformservice.controller.impl;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lm.tradeformservice.controller.ITradeFormController;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 
@@ -12,31 +13,17 @@ import tools.jackson.databind.json.JsonMapper;
 import org.springframework.http.ResponseEntity;
 
 @RestController("basicTradeFormController") 
-public class TradeFormController {
+public class TradeFormControllerImpl implements ITradeFormController {
+  
     private final JsonMapper jsonMapper;
 
-    public TradeFormController(JsonMapper jsonMapper) {
+    public TradeFormControllerImpl(JsonMapper jsonMapper) {
         this.jsonMapper = jsonMapper;
     }
 
-    /**
-     * GET endpoint to check if the TradeForm Service is running
-     * @return ResponseEntity with a message indicating the service is running
-     */
-    @GetMapping("/api")
-    public ResponseEntity<String> getRunningStatus() {
-
-        return ResponseEntity.ok("TradeForm Service is running");
-    }
-    /**
-     * GET endpoint to retrieve a TradeForm by its ID
-     * @param id The ID of the TradeForm to retrieve
-     * @return ResponseEntity containing the TradeForm in JSON format or an error message
-     */
+    @Override
     @GetMapping("/api/tradeforms/{id}") 
-    public ResponseEntity<String> getTradeFormById(@PathVariable String id) {
-        //TODO: Move the ObjectMapper to a service class and use it to convert the TradeForm object to JSON
-
+    public ResponseEntity<String> getTradeFormById(@PathVariable final String id) {
         try {
             TradeForm tradeForm = new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
             String jsonResponse = jsonMapper.writeValueAsString(tradeForm);
@@ -48,4 +35,9 @@ public class TradeFormController {
         }
     }
 
+    @Override
+    @GetMapping("/api")
+    public ResponseEntity<String> getRunningStatus() {
+        return ResponseEntity.ok("TradeForm Service is running");
+    }
 }

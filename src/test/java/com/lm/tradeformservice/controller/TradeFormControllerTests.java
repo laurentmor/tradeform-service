@@ -7,6 +7,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.lm.tradeformservice.controller.impl.TradeFormControllerImpl;
 import com.lm.tradeformservice.dto.TradeForm;
 
 import tools.jackson.databind.json.JsonMapper;
@@ -20,9 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 /**
- * Tests for {@link TradeFormController}.
+ * Tests for {@link TradeFormControllerImpl}.
  */
-@WebMvcTest(TradeFormController.class)
+@WebMvcTest(TradeFormControllerImpl.class)
 public class TradeFormControllerTests {
     /**
      * MockMvc instance for testing the controller.
