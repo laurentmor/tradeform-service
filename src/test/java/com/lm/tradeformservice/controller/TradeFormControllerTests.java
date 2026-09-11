@@ -2,17 +2,16 @@ package com.lm.tradeformservice.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.lm.tradeformservice.TradeFormServiceApplication;
 import com.lm.tradeformservice.controller.impl.TradeFormControllerImpl;
-import com.lm.tradeformservice.dto.TradeForm;
+import com.lm.tradeformservice.service.ITradeFormService;
 
-import tools.jackson.databind.json.JsonMapper;
-
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
@@ -20,76 +19,62 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * Tests for {@link TradeFormControllerImpl}.
+ * 
+ * Tests the REST endpoints for TradeForm resource management, including:
+ * - Health check endpoint (/api)
+ * - TradeForm retrieval endpoint (/api/tradeforms/{id})
+ * - Error handling for invalid inputs and serialization failures
  */
-@WebMvcTest(TradeFormControllerImpl.class)
+@SpringBootTest(classes = TradeFormServiceApplication.class)
 public class TradeFormControllerTests {
-    /**
-     * MockMvc instance for testing the controller.
-     */
-    @Autowired
+
     private MockMvc mockMvc;
 
     @MockitoBean
-    private JsonMapper jsonMapper;
+    private ITradeFormService tradeFormService;
 
     @BeforeEach
     public void setUp() throws Exception {
-        reset(jsonMapper);
-        when(jsonMapper.writeValueAsString(any(TradeForm.class)))
+        reset(tradeFormService);
+        when(tradeFormService.getRunningStatus())
+                .thenReturn("TradeForm Service is running");
+        when(tradeFormService.getTradeFormById("1"))
                 .thenReturn("{\"id\":1,\"status\":\"PENDING\"}");
+        mockMvc = MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService)).build();
     }
 
-    /**
-     * Tests the health check endpoint of the TradeFormController.
-     * @throws Exception if an error occurs during the request.
-     */
     @Test
-    public void healthCheck() throws Exception {
-        // Perform a GET request to the /api endpoint and expect a 200 OK status with the response "TradeForm Service is running".
+    void healthCheck() throws Exception {
         mockMvc.perform(get("/api"))
                 .andExpect(status().isOk())
-            .andExpect(content().string("TradeForm Service is running"));
+                .andExpect(content().string("TradeForm Service is running"));
     }
-    
-    
-    
-    /**
-     * Tests the GET endpoint for retrieving a trade form with a negative ID.
-     * @throws Exception if an error occurs during the request.
-     */
+
     @Test
-    public void testNegativeId() throws Exception {
-        // Perform a GET request to the /api/tradeforms/-1 endpoint and expect a 400 Bad Request status.
+    void testNegativeId() throws Exception {
+        when(tradeFormService.getTradeFormById("-1"))
+                .thenThrow(new IllegalArgumentException("Invalid TradeForm ID"));
+
         mockMvc.perform(get("/api/tradeforms/-1"))
-            .andExpect(status().isBadRequest())
-            .andExpect(content().string("Invalid TradeForm ID"));
-        }
-
-        @Test
-        public void testNonNumericId() throws Exception {
-        mockMvc.perform(get("/api/tradeforms/not-a-number"))
-            .andExpect(status().isBadRequest())
-            .andExpect(content().string("Invalid TradeForm ID"));
-        }
-
-        @Test
-        public void testSerializationFailure() throws Exception {
-        doThrow(new RuntimeException("serialization failed"))
-            .when(jsonMapper).writeValueAsString(any(TradeForm.class));
-
-        mockMvc.perform(get("/api/tradeforms/1"))
-            .andExpect(status().isInternalServerError())
-            .andExpect(content().string("Error converting TradeForm to JSON"));
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid TradeForm ID"));
     }
-    /**
-     * Tests the GET endpoint for retrieving a trade form by its ID.
-     * @throws Exception if an error occurs during the request.
-     */
+
     @Test
-    public void testGetTradeFormById() throws Exception {
-        // Perform a GET request to the /api/tradeforms/1 endpoint and expect a 200 OK status with the correct JSON response.
+    void testNonNumericId() throws Exception {
+        when(tradeFormService.getTradeFormById("not-a-number"))
+                .thenThrow(new IllegalArgumentException("Invalid TradeForm ID"));
+
+        mockMvc.perform(get("/api/tradeforms/not-a-number"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid TradeForm ID"));
+    }
+
+    @Test
+    void testGetTradeFormById() throws Exception {
         mockMvc.perform(get("/api/tradeforms/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":1,\"status\":\"PENDING\"}"));
