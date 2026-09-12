@@ -2,7 +2,15 @@ package com.lm.tradeformservice.dto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for {@link TradeFormStatus}.
+ * 
+ * TradeFormStatusTest
+ */
 public class TradeFormStatusTest {
+    /**
+     * 
+     */
     @Test
     public void testGetDisplayNamePending() {
         TradeFormStatus status = TradeFormStatus.PENDING;

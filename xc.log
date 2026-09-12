@@ -1,0 +1,141 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.lm:tradeformservice >-----------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ tradeformservice ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ tradeformservice ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ tradeformservice ---
+[INFO] skip non existing resourceDirectory C:\Users\laurent.morissette-f\Desktop\Code\learn\JAVA\tradeformservice\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ tradeformservice ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ tradeformservice ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.lm.tradeformservice.controller.TradeFormControllerTests
+15:23:49.887 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-09-11T15:23:50.125-04:00  INFO 64780 --- [tradeformservice] [           main] c.l.t.c.TradeFormControllerTests         : Starting TradeFormControllerTests using Java 17.0.17 with PID 64780 (started by laurent.morissette-f in C:\Users\laurent.morissette-f\Desktop\Code\learn\JAVA\tradeformservice)
+2026-09-11T15:23:50.126-04:00  INFO 64780 --- [tradeformservice] [           main] c.l.t.c.TradeFormControllerTests         : No active profile set, falling back to 1 default profile: "default"
+2026-09-11T15:23:52.380-04:00  INFO 64780 --- [tradeformservice] [           main] c.l.t.c.TradeFormControllerTests         : Started TradeFormControllerTests in 2.504 seconds (process running for 3.509)
+2026-09-11T15:23:52.491-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.491-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.493-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-09-11T15:23:52.607-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.608-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.608-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-09-11T15:23:52.636-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.637-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.637-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-09-11T15:23:52.647-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.647-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.647-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.161 s -- in com.lm.tradeformservice.controller.TradeFormControllerTests
+[INFO] Running com.lm.tradeformservice.dto.TradeFormStatusTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.lm.tradeformservice.dto.TradeFormStatusTest
+[INFO] Running com.lm.tradeformservice.dto.TradeFormTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.lm.tradeformservice.dto.TradeFormTest
+[INFO] Running com.lm.tradeformservice.service.TradeFormServiceTests
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.014 s <<< FAILURE! -- in com.lm.tradeformservice.service.TradeFormServiceTests
+[ERROR] com.lm.tradeformservice.service.TradeFormServiceTests.testGetTradeFormById -- Time elapsed: 0.003 s <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] com.lm.tradeformservice.service.TradeFormServiceTests.testGetRunningStatus -- Time elapsed: 0.001 s <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running com.lm.tradeformservice.TradeFormServiceApplicationTests
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.180 s -- in com.lm.tradeformservice.TradeFormServiceApplicationTests
+[INFO] Running com.lm.tradeformservice.AllTests
+[INFO] Running com.lm.tradeformservice.TradeFormServiceApplicationTests
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.lm.tradeformservice.TradeFormServiceApplicationTests
+[INFO] Running com.lm.tradeformservice.dto.TradeFormStatusTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.lm.tradeformservice.dto.TradeFormStatusTest
+[INFO] Running com.lm.tradeformservice.dto.TradeFormTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.lm.tradeformservice.dto.TradeFormTest
+[INFO] Running com.lm.tradeformservice.service.TradeFormServiceTests
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! -- in com.lm.tradeformservice.service.TradeFormServiceTests
+[ERROR] com.lm.tradeformservice.AllTests.testGetTradeFormById -- Time elapsed: 0.001 s <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[ERROR] com.lm.tradeformservice.AllTests.testGetRunningStatus -- Time elapsed: 0.001 s <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+[INFO] Running com.lm.tradeformservice.controller.TradeFormControllerTests
+2026-09-11T15:23:52.945-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.945-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.945-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-09-11T15:23:52.955-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.956-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.956-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-09-11T15:23:52.965-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.965-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.965-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-09-11T15:23:52.976-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.mock.web.MockServletContext          : Initializing Spring TestDispatcherServlet ''
+2026-09-11T15:23:52.976-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-11T15:23:52.976-04:00  INFO 64780 --- [tradeformservice] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.lm.tradeformservice.controller.TradeFormControllerTests
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.lm.tradeformservice.AllTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   AllTests.testGetRunningStatus » ParameterResolution No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+[ERROR] com.lm.tradeformservice.AllTests.testGetTradeFormById
+[ERROR]   Run 1: AllTests.testGetTradeFormById » ParameterResolution No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+[INFO]   Run 2: PASS
+[INFO] 
+[ERROR]   TradeFormServiceTests.testGetRunningStatus » ParameterResolution No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+[ERROR]   TradeFormServiceTests.testGetTradeFormById » ParameterResolution No ParameterResolver registered for parameter [com.lm.tradeformservice.service.ITradeFormService tradeFormService] in constructor [public com.lm.tradeformservice.service.TradeFormServiceTests(com.lm.tradeformservice.service.ITradeFormService)].
+[INFO] 
+[ERROR] Tests run: 25, Failures: 0, Errors: 4, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.684 s
+[INFO] Finished at: 2026-09-11T15:23:53-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project tradeformservice: 
+[ERROR] 
+[ERROR] See C:\Users\laurent.morissette-f\Desktop\Code\learn\JAVA\tradeformservice\target\surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

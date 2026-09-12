@@ -1,8 +1,8 @@
 package com.lm.tradeformservice.service;
 
 
-import org.springframework.stereotype.Service;
-@Service 
+import tools.jackson.core.JacksonException;
+
 /** Service interface for handling trade form operations
  * 
  */
@@ -17,6 +17,7 @@ public interface ITradeFormService {
      * @throws IllegalArgumentException if the ID is invalid
      * @throws tools.jackson.core.JacksonException if there is an error converting the trade form to JSON
      */
-    public String getTradeFormById(final   String id)throws IllegalArgumentException, tools.jackson.core.JacksonException   ;
+    public String getTradeFormById(final   String id)throws IllegalArgumentException, JacksonException
+       ;
 
 }
