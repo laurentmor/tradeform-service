@@ -1,6 +1,5 @@
 package com.lm.tradeformservice.controller.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,13 +9,18 @@ import com.lm.tradeformservice.dto.ErrorResponse;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.service.ITradeFormService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController("basicTradeFormController") 
+@Slf4j 
 public class TradeFormControllerImpl implements ITradeFormController {
-  @Autowired 
+  
   private ITradeFormService tradeFormService;
   
     public TradeFormControllerImpl( final ITradeFormService tradeFormService) {
         this.tradeFormService = tradeFormService;
+        String controlerStateString = (tradeFormService != null) ? "initialized with TradeFormService" : "initialized without TradeFormService";
+        log.info("TradeFormControllerImpl constructor called, controller state: {}", controlerStateString); 
     }
 
     @Override
@@ -25,8 +29,10 @@ public class TradeFormControllerImpl implements ITradeFormController {
 
         try {
             TradeForm tradeForm = tradeFormService.getTradeFormById(id);
+            log.info("TradeForm retrieved successfully for id: {}", id);
             return ResponseEntity.ok(tradeForm);
         } catch (IllegalArgumentException e) {
+            log.warn("Invalid TradeForm ID provided: {}", id);
             return ResponseEntity
             .badRequest()
             .body(new ErrorResponse("Invalid TradeForm ID"));
@@ -36,7 +42,10 @@ public class TradeFormControllerImpl implements ITradeFormController {
 
     @Override
     @GetMapping("/api")
+
     public ResponseEntity<String> getRunningStatus() {
+        log.info("TradeFormControllerImpl.getRunningStatus() called {}",tradeFormService.getRunningStatus())   ;
+
         return ResponseEntity.ok(tradeFormService.getRunningStatus());
     }
-}
+}       
