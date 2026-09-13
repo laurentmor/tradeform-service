@@ -6,16 +6,9 @@ import org.springframework.stereotype.Service;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.service.ITradeFormService;
-
-import tools.jackson.core.JacksonException;
-import tools.jackson.databind.json.JsonMapper;
 @Service 
 public class TradeFormServiceImpl implements ITradeFormService {
-    private  JsonMapper jsonMapper;
-    public TradeFormServiceImpl(final JsonMapper jsonMapper) {
-        this.jsonMapper = jsonMapper;
-    }
-
+    
     /** Gets the running status of the trade form
      * @return the running status
      */
@@ -29,15 +22,13 @@ public class TradeFormServiceImpl implements ITradeFormService {
      * @return the trade form
      */
     @Override
-    public String getTradeFormById(String id) throws IllegalArgumentException, JacksonException {
+    public TradeForm getTradeFormById(String id) throws IllegalArgumentException{
             try {
-            TradeForm tradeForm = new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
-            String jsonResponse = jsonMapper.writeValueAsString(tradeForm);
-            return jsonResponse;
+            return new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
+            
+            
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid TradeForm ID");
-        } catch (JacksonException e) {
-            throw e;
-        }
+        } 
     }
 }

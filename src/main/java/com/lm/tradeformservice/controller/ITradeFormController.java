@@ -3,6 +3,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 /**
  * Controller interface for managing TradeForm resources.
  * 
@@ -15,7 +16,7 @@ public interface ITradeFormController {
      * @return a ResponseEntity containing the TradeForm if found, or an appropriate error response
      */
     @GetMapping("/api/tradeforms/{id}") 
-    public ResponseEntity<String>  getTradeFormById(@PathVariable final  String id); 
+    public ResponseEntity<?>  getTradeFormById(@PathVariable final  String id); 
     /**
      * Checks the running status of the TradeForm Service.
      *

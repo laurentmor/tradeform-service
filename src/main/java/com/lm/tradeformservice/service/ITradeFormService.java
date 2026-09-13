@@ -1,7 +1,6 @@
 package com.lm.tradeformservice.service;
 
-
-import tools.jackson.core.JacksonException;
+import com.lm.tradeformservice.dto.TradeForm;
 
 /** Service interface for handling trade form operations
  * 
@@ -15,9 +14,8 @@ public interface ITradeFormService {
      * @param id the ID of the trade form
      * @return the trade form
      * @throws IllegalArgumentException if the ID is invalid
-     * @throws tools.jackson.core.JacksonException if there is an error converting the trade form to JSON
+     * 
      */
-    public String getTradeFormById(final   String id)throws IllegalArgumentException, JacksonException
-       ;
+    public TradeForm getTradeFormById(final   String id)throws IllegalArgumentException    ;
 
 }

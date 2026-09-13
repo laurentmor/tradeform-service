@@ -9,10 +9,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.lm.tradeformservice.TradeFormServiceApplication;
 import com.lm.tradeformservice.controller.impl.TradeFormControllerImpl;
+import com.lm.tradeformservice.dto.TradeForm;
+import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.service.ITradeFormService;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TradeFormControllerTests {
 
     private MockMvc mockMvc;
-
+                                 
     @MockitoBean
     private ITradeFormService tradeFormService;
 
@@ -42,8 +42,9 @@ public class TradeFormControllerTests {
         when(tradeFormService.getRunningStatus())
                 .thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById("1"))
-                .thenReturn("{\"id\":1,\"status\":\"PENDING\"}");
-        mockMvc = MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService)).build();
+        .thenReturn(new TradeForm(1, TradeFormStatus.PENDING));
+        mockMvc = MockMvcBuilders.
+        standaloneSetup(new TradeFormControllerImpl(tradeFormService)).build();
     }
 
     @Test
@@ -60,7 +61,7 @@ public class TradeFormControllerTests {
 
         mockMvc.perform(get("/api/tradeforms/-1"))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Invalid TradeForm ID"));
+                .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
     }
 
     @Test
@@ -70,8 +71,8 @@ public class TradeFormControllerTests {
 
         mockMvc.perform(get("/api/tradeforms/not-a-number"))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("Invalid TradeForm ID"));
-    }
+                .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
+    }   
 
     @Test
     void testGetTradeFormById() throws Exception {
