@@ -31,7 +31,7 @@ public class TradeFormServiceImpl implements ITradeFormService {
             
             
         } catch (IllegalArgumentException e) {
-            log.error("Invalid TradeForm ID: {}", id, e);
+            log.warn("Invalid TradeForm ID: {}", id);
             throw new IllegalArgumentException("Invalid TradeForm ID");
         } 
     }

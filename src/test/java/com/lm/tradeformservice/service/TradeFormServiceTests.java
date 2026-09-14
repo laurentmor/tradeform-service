@@ -3,14 +3,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.service.impl.TradeFormServiceImpl;
 
-import tools.jackson.databind.json.JsonMapper;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -18,9 +17,7 @@ public class TradeFormServiceTests {
 
     
     private TradeFormServiceImpl tradeFormService;
-    @Mock 
-    private JsonMapper jsonMapper;
-
+    
     @BeforeEach 
     public void setup() {
         // Setup code here if needed

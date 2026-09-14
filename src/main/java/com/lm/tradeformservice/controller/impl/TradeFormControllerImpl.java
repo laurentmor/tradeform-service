@@ -44,8 +44,8 @@ public class TradeFormControllerImpl implements ITradeFormController {
     @GetMapping("/api")
 
     public ResponseEntity<String> getRunningStatus() {
-        log.info("TradeFormControllerImpl.getRunningStatus() called {}",tradeFormService.getRunningStatus())   ;
-
-        return ResponseEntity.ok(tradeFormService.getRunningStatus());
+        String status = tradeFormService.getRunningStatus();
+        log.info("TradeFormControllerImpl.getRunningStatus() called, status: {}", status);
+        return ResponseEntity.ok(status);
     }
 }       
