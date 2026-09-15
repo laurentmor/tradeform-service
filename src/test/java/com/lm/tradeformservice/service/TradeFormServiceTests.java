@@ -2,9 +2,6 @@ package com.lm.tradeformservice.service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
@@ -12,7 +9,7 @@ import com.lm.tradeformservice.service.impl.TradeFormServiceImpl;
 
 
 
-@ExtendWith(MockitoExtension.class)
+
 public class TradeFormServiceTests {
 
     
@@ -41,8 +38,8 @@ public class TradeFormServiceTests {
     @Test
     public void testGetTradeFormByPositiveId() throws Exception {
     
-        String id = "1";
-        TradeForm tradeForm = tradeFormService.getTradeFormById(id);
+        
+        TradeForm tradeForm = tradeFormService.getTradeFormById(1);
         Assertions.assertNotNull(tradeForm);
         Assertions.assertEquals(1, tradeForm.id());
         Assertions.assertEquals(TradeFormStatus.PENDING, tradeForm.status());
@@ -55,15 +52,11 @@ public class TradeFormServiceTests {
      */
     @Test
     public void testGetTradeFormByNegativeId() {
-        String negativeId = "-1";
+       int negativeId = -1;
         Assertions.assertThrows(IllegalArgumentException.class, () -> tradeFormService.getTradeFormById(negativeId));
     }
     
-    @Test
-    public void testGetTradeFormByInvalidId() {
-        String invalidId = "abc";
-        Assertions.assertThrows(IllegalArgumentException.class, () -> tradeFormService.getTradeFormById(invalidId));
-    }
+   
     
     
 }

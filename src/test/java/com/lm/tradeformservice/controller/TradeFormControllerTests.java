@@ -41,7 +41,7 @@ public class TradeFormControllerTests {
         reset(tradeFormService);
         when(tradeFormService.getRunningStatus())
                 .thenReturn("TradeForm Service is running");
-        when(tradeFormService.getTradeFormById("1"))
+        when(tradeFormService.getTradeFormById(1))
         .thenReturn(new TradeForm(1, TradeFormStatus.PENDING));
         mockMvc = MockMvcBuilders.
         standaloneSetup(new TradeFormControllerImpl(tradeFormService)).build();
@@ -56,7 +56,7 @@ public class TradeFormControllerTests {
 
     @Test
     void testNegativeId() throws Exception {
-        when(tradeFormService.getTradeFormById("-1"))
+        when(tradeFormService.getTradeFormById(-1))
                 .thenThrow(new IllegalArgumentException("Invalid TradeForm ID"));
 
         mockMvc.perform(get("/api/tradeforms/-1"))
@@ -64,16 +64,7 @@ public class TradeFormControllerTests {
                 .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
     }
 
-    @Test
-    void testNonNumericId() throws Exception {
-        when(tradeFormService.getTradeFormById("not-a-number"))
-                .thenThrow(new IllegalArgumentException("Invalid TradeForm ID"));
-
-        mockMvc.perform(get("/api/tradeforms/not-a-number"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
-    }   
-
+    
     @Test
     void testGetTradeFormById() throws Exception {
         mockMvc.perform(get("/api/tradeforms/1"))

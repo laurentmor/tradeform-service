@@ -16,7 +16,7 @@ public interface ITradeFormController {
      * @return a ResponseEntity containing the TradeForm if found, or an appropriate error response
      */
     @GetMapping("/api/tradeforms/{id}") 
-    public ResponseEntity<?>  getTradeFormById(@PathVariable final  String id); 
+    public ResponseEntity<?>  getTradeFormById(@PathVariable final  int id); 
     /**
      * Checks the running status of the TradeForm Service.
      *

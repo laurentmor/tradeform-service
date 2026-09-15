@@ -14,9 +14,9 @@ public interface ITradeFormService {
     /** Gets a trade form by its ID
      * @param id the ID of the trade form
      * @return the trade form
-     * @throws IllegalArgumentException if the ID is invalid
+     * 
      * 
      */
-    public TradeForm getTradeFormById(final   String id)throws IllegalArgumentException    ;
+    public TradeForm getTradeFormById(final   int  id)   ;
 
 }

@@ -28,10 +28,10 @@ public class TradeFormServiceImpl implements ITradeFormService {
      * @return the trade form
      */
     @Override
-    public TradeForm getTradeFormById(String id) throws IllegalArgumentException{
+    public TradeForm getTradeFormById(final int id) {
             try {
                 log.info("getTradeFormById called with id: {}", id);
-            return new TradeForm(Integer.parseInt(id), TradeFormStatus.PENDING);
+            return new TradeForm(id, TradeFormStatus.PENDING);
             
             
         } catch (IllegalArgumentException e) {

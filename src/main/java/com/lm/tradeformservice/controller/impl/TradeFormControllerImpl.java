@@ -34,7 +34,7 @@ public class TradeFormControllerImpl implements ITradeFormController {
      * @param id the ID of the TradeForm to retrieve
      * @return a ResponseEntity containing the TradeForm if found, or an appropriate error response
      */ 
-    public ResponseEntity<?> getTradeFormById(@PathVariable final String id) {
+    public ResponseEntity<?> getTradeFormById(@PathVariable final int id) {
 
         try {
             TradeForm tradeForm = tradeFormService.getTradeFormById(id);
