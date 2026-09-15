@@ -2,7 +2,8 @@ package com.lm.tradeformservice.service;
 
 import com.lm.tradeformservice.dto.TradeForm;
 
-/** Service interface for handling trade form operations
+/** 
+ * Service interface for handling trade form operations
  * 
  */
 public interface ITradeFormService {

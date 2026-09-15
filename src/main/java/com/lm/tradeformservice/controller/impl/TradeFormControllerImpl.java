@@ -17,14 +17,23 @@ public class TradeFormControllerImpl implements ITradeFormController {
   
   private ITradeFormService tradeFormService;
   
-    public TradeFormControllerImpl( final ITradeFormService tradeFormService) {
+  /**
+   *  DefaulT constructor for TradeFormControllerImpl
+   *  @param tradeFormService the trade form service to be used
+   *  */  
+  public TradeFormControllerImpl( final ITradeFormService tradeFormService) {
         this.tradeFormService = tradeFormService;
-        String controlerStateString = (tradeFormService != null) ? "initialized with TradeFormService" : "initialized without TradeFormService";
-        log.info("TradeFormControllerImpl constructor called, controller state: {}", controlerStateString); 
+        log.info("TradeFormControllerImpl initialized");
     }
 
     @Override
-    @GetMapping("/api/tradeforms/{id}") 
+    @GetMapping("/api/tradeforms/{id}")
+    /**
+     * Retrieves a TradeForm by its ID.
+     *
+     * @param id the ID of the TradeForm to retrieve
+     * @return a ResponseEntity containing the TradeForm if found, or an appropriate error response
+     */ 
     public ResponseEntity<?> getTradeFormById(@PathVariable final String id) {
 
         try {
@@ -42,7 +51,11 @@ public class TradeFormControllerImpl implements ITradeFormController {
 
     @Override
     @GetMapping("/api")
-
+    /**
+     * Checks the running status of the TradeForm Service.
+     *
+     * @return a ResponseEntity containing the status message
+     */
     public ResponseEntity<String> getRunningStatus() {
         String status = tradeFormService.getRunningStatus();
         log.info("TradeFormControllerImpl.getRunningStatus() called, status: {}", status);

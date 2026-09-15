@@ -8,6 +8,10 @@ import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.service.ITradeFormService;
 @Service 
 @Slf4j 
+/**
+ * Implementation of the ITradeFormService interface for handling trade form operations.
+ * This service provides methods to retrieve the running status of the trade form service
+ */
 public class TradeFormServiceImpl implements ITradeFormService {
     
     /** Gets the running status of the trade form
