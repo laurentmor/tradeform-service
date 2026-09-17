@@ -7,15 +7,18 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
 import static lombok.AccessLevel.PROTECTED;
+
+import org.springframework.data.annotation.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity 
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED) 
 /**
@@ -27,8 +30,8 @@ public class TradeFormEntity {
      * The unique identifier for the trade form entity.
      */
     @Id  
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull 
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+ 
     @Getter 
     private Long id;
     /**
