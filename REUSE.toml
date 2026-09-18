@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2025 Your Organization
+# SPDX-License-Identifier: MIT
+version = 1
+SPDX-PackageName = "create-springboot-enterprise"
+SPDX-PackageSupplier = "Your Organization"
+SPDX-PackageDownloadLocation = "https://github.com/your-org/create-springboot-enterprise"
+
+[[annotations]]
+path = [
+  "package.json",
+  "package-lock.json",
+  "bun.lock",
+  "bun.lockb",
+  "pnpm-lock.yaml",
+  "tsconfig.json",
+  ".lintstagedrc.json",
+  ".prettierrc.json",
+  "release-please-config.json",
+  ".release-please-manifest.json",
+  "REUSE.toml",
+]
+SPDX-FileCopyrightText = "2025 Your Organization"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["README.md", "CHANGELOG.md", ".nvmrc", ".gitignore", ".prettierignore"]
+SPDX-FileCopyrightText = "2025 Your Organization"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "templates/**"
+SPDX-FileCopyrightText = "2025 Your Organization"
+SPDX-License-Identifier = "MIT"

@@ -77,15 +77,16 @@
 			<version>6.0.3</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- temporary database dependency so tests passes
-		-->
-
+		
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>6.0.3</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- temporary database dependency so tests passes
+		-->
+
 		<dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
@@ -104,6 +105,33 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- plugin to enforce and apply consistent code formatting -->
+			<plugin>
+				<groupId>com.diffplug.spotless</groupId>
+				<artifactId>spotless-maven-plugin</artifactId>
+				<version>2.46.1</version>
+				<configuration>
+					<java>
+						<googleJavaFormat>
+							<version>1.28.0</version>
+							<style>AOSP</style>
+						</googleJavaFormat>
+						<removeUnusedImports/>
+						<importOrder/>
+						<trimTrailingWhitespace/>
+						<endWithNewline/>
+					</java>
+				</configuration>
+				<executions>
+					<execution>
+						<id>spotless-check</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<!-- plugin to retrieve Git commit information -->
 			<plugin>

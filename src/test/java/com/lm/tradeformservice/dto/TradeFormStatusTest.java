@@ -1,16 +1,15 @@
 package com.lm.tradeformservice.dto;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link TradeFormStatus}.
- * 
- * TradeFormStatusTest
+ *
+ * <p>TradeFormStatusTest
  */
 public class TradeFormStatusTest {
-    /**
-     * 
-     */
+    /** */
     @Test
     public void testGetDisplayNamePending() {
         TradeFormStatus status = TradeFormStatus.PENDING;
@@ -31,5 +30,4 @@ public class TradeFormStatusTest {
         String displayName = status.getDisplayName();
         Assertions.assertEquals("Rejected", displayName);
     }
-
 }

@@ -7,7 +7,8 @@ public class TradeFormTest {
     @Test
     public void testTradeFormWithNegativeId() {
         int negativeId = -1;
-        Assertions.assertThrows(IllegalArgumentException.class, () -> new TradeForm(negativeId, TradeFormStatus.PENDING));
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new TradeForm(negativeId, TradeFormStatus.PENDING));
     }
-
 }
