@@ -45,6 +45,10 @@ jobs:
       # - name: Lint (Checkstyle)
       #   run: ./mvnw checkstyle:check
       #
+      # 
+      - name: Make maven wrapper executable
+        run: chmod +x ./mvnw
+        
       - name: Format check (Spotless)
         run: ./mvnw spotless:check spotless:apply
 
