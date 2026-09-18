@@ -1,21 +1,94 @@
-# SPDX-FileCopyrightText: 2025 Your Organization
-# SPDX-License-Identifier: MIT
-
-name: release-please
+name: CI + Quality + Release
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+  pull_request:
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  release-please:
+  quality:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: googleapis/release-please-action@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
+          fetch-depth: 0 # historique complet requis par git-commit-id-maven-plugin
+
+      # -------------------------
+      # CACHE (Maven)
+      # -------------------------
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      # -------------------------
+      # LINT / FORMAT CHECK
+      # -------------------------
+      # Remplace par ton plugin de lint Maven si tu en ajoutes un
+      # (ex: spotless-maven-plugin, checkstyle-maven-plugin).
+      # - name: Lint (Checkstyle)
+      #   run: ./mvnw checkstyle:check
+      #
+      - name: Format check (Spotless)
+        run: ./mvnw spotless:check spotless:apply
+
+      # -------------------------
+      # BUILD + TESTS + COVERAGE
+      # -------------------------
+      - name: Build and run tests with coverage
+        run: ./mvnw clean verify
+
+      # -------------------------
+      # CODECOV
+      # -------------------------
+      # Nécessite le plugin jacoco-maven-plugin configuré dans le pom.xml
+      # pour générer target/site/jacoco/jacoco.xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: target/site/jacoco/jacoco.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      # -------------------------
+      # ARTIFACT (zip source horodaté par commit)
+      # -------------------------
+      - name: Upload source zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tradeformservice-source
+          path: tradeformservice-*.zip
+
+  # -------------------------
+  # RELEASE
+  # -------------------------
+  release:
+    needs: quality
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Release Please
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: maven
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
