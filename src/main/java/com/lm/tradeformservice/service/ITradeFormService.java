@@ -17,5 +17,5 @@ public interface ITradeFormService {
      * @param id the ID of the trade form
      * @return the trade form
      */
-    public TradeForm getTradeFormById(final int id);
+    public TradeForm getTradeFormById(final long id);
 }

@@ -3,15 +3,17 @@ package com.lm.tradeformservice.service.impl;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.service.ITradeFormService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Service
-@Slf4j
 /**
  * Implementation of the ITradeFormService interface for handling trade form operations. This
  * service provides methods to retrieve the running status of the trade form service
  */
+@Service
+@Slf4j
+@AllArgsConstructor
 public class TradeFormServiceImpl implements ITradeFormService {
 
     /**
@@ -21,6 +23,7 @@ public class TradeFormServiceImpl implements ITradeFormService {
      */
     @Override
     public String getRunningStatus() {
+
         log.info("TradeFormServiceImpl.getRunningStatus() called");
         return "TradeForm Service is running";
     }
@@ -32,9 +35,9 @@ public class TradeFormServiceImpl implements ITradeFormService {
      * @return the trade form
      */
     @Override
-    public TradeForm getTradeFormById(final int id) {
+    public TradeForm getTradeFormById(final long id) {
         try {
-            log.info("getTradeFormById called with id: {}", id);
+
             return new TradeForm(id, TradeFormStatus.PENDING);
 
         } catch (IllegalArgumentException e) {

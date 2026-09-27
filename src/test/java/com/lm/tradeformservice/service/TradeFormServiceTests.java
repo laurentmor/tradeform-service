@@ -6,15 +6,19 @@ import com.lm.tradeformservice.service.impl.TradeFormServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class TradeFormServiceTests {
 
-    private TradeFormServiceImpl tradeFormService;
+    @Autowired private TradeFormServiceImpl tradeFormService;
 
     @BeforeEach
     public void setup() {
         // Setup code here if needed
-        tradeFormService = new TradeFormServiceImpl();
+        // tradeFormService = new TradeFormServiceImpl(new
+        // com.lm.tradeformservice.repository.impl.TradeFormRepositoryImpl());
     }
 
     /** Tests status */
@@ -33,7 +37,7 @@ public class TradeFormServiceTests {
     @Test
     public void testGetTradeFormByPositiveId() throws Exception {
 
-        TradeForm tradeForm = tradeFormService.getTradeFormById(1);
+        TradeForm tradeForm = tradeFormService.getTradeFormById(1L);
         Assertions.assertNotNull(tradeForm);
         Assertions.assertEquals(1, tradeForm.id());
         Assertions.assertEquals(TradeFormStatus.PENDING, tradeForm.status());

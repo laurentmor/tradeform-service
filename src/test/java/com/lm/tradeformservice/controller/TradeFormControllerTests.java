@@ -36,8 +36,8 @@ public class TradeFormControllerTests {
     public void setUp() throws Exception {
         reset(tradeFormService);
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
-        when(tradeFormService.getTradeFormById(1))
-                .thenReturn(new TradeForm(1, TradeFormStatus.PENDING));
+        when(tradeFormService.getTradeFormById(1L))
+                .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
         mockMvc =
                 MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService))
                         .build();
