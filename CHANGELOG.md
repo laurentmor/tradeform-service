@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/laurentmor/tradeform-service/compare/v1.0.0...v1.1.0) (2026-09-28)
+
+
+### Features
+
+* add JPA repository for trade forms - removed unnecessary search for non-existant ID test ([6f642cc](https://github.com/laurentmor/tradeform-service/commit/6f642cc8e0073fef9c21408d1e0499d72c2046b0))
+* add JPA repository for trade forms - tests are passing ([b2008e7](https://github.com/laurentmor/tradeform-service/commit/b2008e7d933747e629d39f066299a965761116c0))
+
 ## 1.0.0 (2026-09-19)
 
 
