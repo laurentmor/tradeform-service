@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Tasks for the Java 25 upgrade plan for tradeformservice.",
+  "tasks": [
+    {
+      "type": "upgrade",
+      "id": "001-upgrade-java-17-to-25",
+      "description": "Upgrade tradeformservice from Java 17 to Java 25, the latest LTS version identified by the assessment.",
+      "reason": "Addresses the assessment finding: Java Version is not the latest LTS.",
+      "requirements": "Addresses issues: Java Version is not the latest LTS. Set the project runtime to Java 25 while retaining the existing Spring Boot 4.1.1 framework version. Verify that the Maven project builds and its existing unit tests pass.",
+      "status": "success",
+      "taskSummary": "Java 25 clean verification passed on Temurin 25.0.4.1. All 38 tests passed after configuring the repository tests to use the local PostgreSQL test database.",
+      "successCriteriaStatus": {
+        "passBuild": "true",
+        "generateNewUnitTests": "true",
+        "passUnitTests": "true"
+      },
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    },
+    {
+      "type": "security",
+      "id": "002-security-cve-remediation",
+      "description": "Scan project dependencies for known CVEs and remediate any identified vulnerabilities.",
+      "reason": "The modernization plan workflow requires a security and CVE review.",
+      "requirements": "Scan project dependencies for known CVEs and upgrade vulnerable dependencies to the minimum patched version. If a fix requires a major-version upgrade, document the affected dependency, current and target versions, and breaking-change risks. Verify that the project builds and all unit tests pass after remediation.",
+      "status": "success",
+      "taskSummary": "Remediated 10 CVEs by upgrading managed Jackson dependencies to 3.1.7 and Tomcat dependencies to 11.0.25. The final dependency scan is clean, Java 25 clean verification passed, and all 38 tests passed.",
+      "cveReport": ".github/modernize/plans/java-version-upgrade/final-cve-report.json",
+      "successCriteriaStatus": {
+        "passBuild": "true",
+        "generateNewUnitTests": "true",
+        "passUnitTests": "true"
+      },
+      "dependencies": [
+        "001-upgrade-java-17-to-25"
+      ],
+      "successCriteria": {
+        "passBuild": "true",
+        "generateNewUnitTests": "false",
+        "passUnitTests": "true"
+      }
+    }
+  ],
+  "metadata": {
+    "planName": "Java 25 Upgrade",
+    "projectName": "tradeformservice",
+    "language": "java",
+    "createdAt": "2026-10-11T22:02:24-04:00",
+    "version": "1.0"
+  }
+}
