@@ -76,7 +76,7 @@ jobs:
       # BUILD + TESTS + COVERAGE
       # -------------------------
       - name: Build and run tests with coverage
-        run: ./mvnw clean verify
+        run: ./mvnw clean verify -Dassembly.skipAssembly=true
 
       # -------------------------
       # CODECOV
@@ -89,15 +89,6 @@ jobs:
           files: target/site/jacoco/jacoco.xml
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      # -------------------------
-      # ARTIFACT (zip source horodaté par commit)
-      # -------------------------
-      - name: Upload source zip artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: tradeformservice-source
-          path: tradeformservice-*.zip
 
   # -------------------------
   # RELEASE

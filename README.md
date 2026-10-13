@@ -88,9 +88,9 @@ The service starts on `http://localhost:8080` by default.
 
 ## Build Artifacts
 
-The build is configured to automatically produce a **source zip** on each build, named after the current Git commit hash, using the [`git-commit-id-maven-plugin`](https://github.com/git-commit-id/git-commit-id-maven-plugin) together with the `maven-assembly-plugin`.
+Local Maven builds automatically produce a **source zip** named after the current Git commit hash, using the [`git-commit-id-maven-plugin`](https://github.com/git-commit-id/git-commit-id-maven-plugin) together with the `maven-assembly-plugin`. The GitHub Actions build and test job skips source-zip creation to avoid generating an artifact that is not needed by CI.
 
-After running `./mvnw clean package`, you'll find a zip at the project root:
+After running `./mvnw clean package` locally, you'll find a zip at the project root:
 
 ```
 tradeformservice-<commit-hash>.zip
