@@ -1,52 +1,30 @@
 # TradeForm Service
 
-A Spring Boot service built as the reference application for the **[Spring Boot RPG](./SPRING_BOOT_RPG_README.md)** — a progressive, quest-based learning journey for enterprise Java and Spring Boot.
-
-`tradeform-service` is a fictional trade-form management API, inspired by enterprise financial software. It starts as a minimal REST service and evolves quest by quest toward a production-quality application, gradually introducing persistence, validation, resilience, messaging, security, and observability.
+TradeForm Service is a Spring Boot REST API and a hands-on learning project for the [Spring Boot RPG](./SPRING_BOOT_RPG_README.md). It models trade forms and is being developed incrementally as a way to learn enterprise Java and Spring Boot.
 
 ## Tech Stack
 
-- **Java 17**
-- **Spring Boot 4.1.1** (Spring Web)
-- **Maven** (with the Maven Wrapper — no local Maven install required)
-- **Lombok**
-- **JUnit 5 / Spring Boot Test**
-- **Jakarta Persistence API** (ready for upcoming persistence quests)
+- **Java 25**
+- **Spring Boot 4.1.1**
+- **Spring Web** for the REST API
+- **Spring Data JPA** and **Hibernate** for persistence
+- **PostgreSQL** with the PostgreSQL JDBC driver
+- **Maven Wrapper** for builds and tests
+- **Lombok** and **Spotless** for development
+- **JUnit 5** and Spring Boot Test for automated tests
 
-## Current State
+GitHub Actions runs the build and tests with Java 25 and PostgreSQL 18.
 
-The application is at **Level 1 — The REST Awakening** of the learning campaign.
+## Current Functionality
 
-Domain model:
+The API currently exposes two GET endpoints:
 
-```
-TradeForm:
-  - int id
-  - TradeFormStatus status
+| Endpoint | Response |
+| --- | --- |
+| `GET /api` | Service status text |
+| `GET /api/tradeforms/{id}` | A trade form with the requested ID and `PENDING` status |
 
-TradeFormStatus:
-  - PENDING
-  - APPROVED
-  - REJECTED
-```
-
-Current architecture:
-
-```
-HTTP Request → Controller → Service → DTO
-```
-
-Available endpoint:
-
-```
-GET /api/tradeforms/{id}
-```
-
-Example:
-
-```
-GET /api/tradeforms/1
-```
+For example, `GET /api/tradeforms/1` returns:
 
 ```json
 {
@@ -55,85 +33,81 @@ GET /api/tradeforms/1
 }
 ```
 
-See [`SPRING_BOOT_RPG_README.md`](./SPRING_BOOT_RPG_README.md) for the full campaign map, rules of the game, and the mentor prompt used to guide development quest by quest.
+The project includes a JPA entity and Spring Data repository, but the trade-form endpoint currently returns a synthetic response; it does not read trade forms from PostgreSQL yet. Negative IDs return HTTP 400.
+
+The code is organized around a controller, service, DTO, and persistence layers. See the [Spring Boot RPG guide](./SPRING_BOOT_RPG_README.md) for the learning goals and planned progression.
 
 ## Getting Started
 
 ### Prerequisites
 
-- JDK 17+
+- JDK 25
+- A reachable PostgreSQL database
 - Git
 
-No local Maven installation is required — the project ships with the Maven Wrapper (`mvnw` / `mvnw.cmd`).
+Maven does not need to be installed separately; the Maven Wrapper is included.
 
-### Build
+### Configure PostgreSQL
+
+The application and repository tests use the PostgreSQL datasource configured in `src/main/resources/application.properties`. Copy `.env.sample` to `.env` and set `datasource.url`, `datasource.username`, and `datasource.password` to credentials for a database you can access.
+
+The database server must be running before starting the application or running the full test suite. CI starts PostgreSQL 18 automatically for its build and test job.
+
+### Build and Test
 
 ```bash
-./mvnw clean package
+./mvnw clean verify
 ```
 
-### Run
-
-```bash
-./mvnw spring-boot:run
-```
-
-The service starts on `http://localhost:8080` by default.
-
-### Test
+Run only the tests with:
 
 ```bash
 ./mvnw test
 ```
 
-## Build Artifacts
+On Windows PowerShell, use `.\mvnw.cmd` in place of `./mvnw`.
 
-Local Maven builds automatically produce a **source zip** named after the current Git commit hash, using the [`git-commit-id-maven-plugin`](https://github.com/git-commit-id/git-commit-id-maven-plugin) together with the `maven-assembly-plugin`. The GitHub Actions build and test job skips source-zip creation to avoid generating an artifact that is not needed by CI.
+### Run the Service
 
-After running `./mvnw clean package` locally, you'll find a zip at the project root:
-
-```
-tradeformservice-<commit-hash>.zip
+```bash
+./mvnw spring-boot:run
 ```
 
-This zip contains the project source (excluding `target/`, `.git/`, and IDE files) and is useful for traceable snapshots tied to a specific commit.
+The service listens at `http://localhost:8080` by default. For example:
+
+```bash
+curl http://localhost:8080/api
+curl http://localhost:8080/api/tradeforms/1
+```
+
+## CI and Build Artifacts
+
+The GitHub Actions workflow checks formatting, then runs `clean verify` against PostgreSQL 18. It skips creation of the source archive in CI.
+
+Local Maven lifecycle builds that reach the `test` phase (including `clean package` and `clean verify`) create a source zip named `tradeformservice-<commit-hash>.zip` at the project root. The archive excludes `target/`, `.git/`, and IDE files.
 
 ## Project Structure
 
+```text
+src/
+├── main/
+│   ├── java/com/lm/tradeformservice/
+│   │   ├── controller/
+│   │   ├── dto/
+│   │   ├── entity/
+│   │   ├── repository/
+│   │   └── service/
+│   └── resources/application.properties
+├── test/java/com/lm/tradeformservice/
+└── assembly/source-zip.xml
+.github/workflows/release-please.yml
+pom.xml
 ```
-tradeform-service/
-├── src/
-│   ├── main/java/...     # Application source
-│   └── assembly/         # Assembly descriptor for the source zip
-├── .mvn/wrapper/          # Maven Wrapper files
-├── pom.xml
-├── SPRING_BOOT_RPG_README.md   # Full learning campaign & rules
-└── README.md
-```
-
-## Roadmap
-
-The application will progressively evolve to include:
-
-- JPA entities, repositories, and PostgreSQL persistence
-- Bean Validation and business rule enforcement
-- Centralized exception handling
-- Transactions, Actuator, and structured logging
-- Resilience patterns (retry, circuit breakers, idempotency)
-- Event-driven messaging (Kafka/RabbitMQ)
-- Spring Security (authentication & authorization)
-- Docker, GitHub Actions, and CI/CD automation
-
-See the [campaign map](./SPRING_BOOT_RPG_README.md#️-campaign-map) for the complete list of levels and quests.
 
 ## Contributing
 
-This is a personal learning project. Suggestions and code-review-style feedback are welcome via issues, but the intent is to write and evolve the code by hand as part of the learning process described in `SPRING_BOOT_RPG_README.md`.
-
-## Code of Conduct
-
-This project follows the [Contributor Covenant Code of Conduct](./CODE_OF_CONDUCT.md).
+This is a personal learning project. Suggestions and code-review-style feedback are welcome via issues. The [Spring Boot RPG guide](./SPRING_BOOT_RPG_README.md) describes the learning approach.
 
 ## License
 
-No license has been specified yet. All rights reserved by default until a license is added.
+No license has been specified. All rights are reserved by default until a license is added.
