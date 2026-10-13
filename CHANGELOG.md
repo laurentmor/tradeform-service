@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/laurentmor/tradeform-service/compare/v1.1.0...v1.2.0) (2026-10-13)
+
+
+### Features
+
+* add postgress config and actualize master instructionns ([2efaee1](https://github.com/laurentmor/tradeform-service/commit/2efaee11b5240f7618688611dcc94ec643bacd0d))
+
+
+### Documentation
+
+* record Java 25 upgrade plan and CVE remediation ([dda2446](https://github.com/laurentmor/tradeform-service/commit/dda24468feea59104d1335e5ed31ed83e701717a))
+
 ## [1.1.0](https://github.com/laurentmor/tradeform-service/compare/v1.0.0...v1.1.0) (2026-09-28)
 
 
