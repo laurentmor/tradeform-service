@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/laurentmor/tradeform-service/compare/v1.2.0...v1.2.1) (2026-10-13)
+
+
+### Documentation
+
+* align README with current stack and API ([41c2fde](https://github.com/laurentmor/tradeform-service/commit/41c2fde96f0198a318efc7eafa7918356f1a40da))
+
 ## [1.2.0](https://github.com/laurentmor/tradeform-service/compare/v1.1.0...v1.2.0) (2026-10-13)
 
 
