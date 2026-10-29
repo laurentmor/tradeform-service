@@ -19,19 +19,25 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
- * Tests for {@link TradeFormControllerImpl}.
+ * MVC tests for {@link TradeFormControllerImpl}.
  *
- * <p>Tests the REST endpoints for TradeForm resource management, including: - Health check endpoint
- * (/api) - TradeForm retrieval endpoint (/api/tradeforms/{id}) - Error handling for invalid inputs
- * and serialization failures
+ * <p>Uses a mocked {@link ITradeFormService} and standalone MockMvc to verify the status endpoint,
+ * successful trade-form JSON response, and HTTP 400 response for invalid identifiers.
  */
 @SpringBootTest(classes = TradeFormServiceApplication.class)
 public class TradeFormControllerTests {
 
+    /** Mock MVC dispatcher configured for the controller under test. */
     private MockMvc mockMvc;
 
+    /** Mock service used to isolate HTTP behavior from business logic. */
     @MockitoBean private ITradeFormService tradeFormService;
 
+    /**
+     * Resets the service mock, stubs expected behavior, and builds the standalone MVC fixture.
+     *
+     * @throws Exception if MockMvc setup fails
+     */
     @BeforeEach
     public void setUp() throws Exception {
         reset(tradeFormService);
@@ -43,6 +49,11 @@ public class TradeFormControllerTests {
                         .build();
     }
 
+    /**
+     * Verifies that {@code GET /api} returns HTTP 200 and the service status text.
+     *
+     * @throws Exception if the MockMvc request fails
+     */
     @Test
     void healthCheck() throws Exception {
         mockMvc.perform(get("/api"))
@@ -50,6 +61,11 @@ public class TradeFormControllerTests {
                 .andExpect(content().string("TradeForm Service is running"));
     }
 
+    /**
+     * Verifies that a negative identifier is translated to HTTP 400 with an error JSON body.
+     *
+     * @throws Exception if the MockMvc request fails
+     */
     @Test
     void testNegativeId() throws Exception {
         when(tradeFormService.getTradeFormById(-1))
@@ -60,6 +76,11 @@ public class TradeFormControllerTests {
                 .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
     }
 
+    /**
+     * Verifies that {@code GET /api/tradeforms/1} returns the expected trade-form JSON.
+     *
+     * @throws Exception if the MockMvc request fails
+     */
     @Test
     void testGetTradeFormById() throws Exception {
         mockMvc.perform(get("/api/tradeforms/1"))

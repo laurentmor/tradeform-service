@@ -12,12 +12,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Tests for {@link TradeFormServiceApplication}.
+ * Unit tests for the Spring Boot application entry point.
  *
- * <p>Tests the Spring Boot application entry point and class structure.
+ * <p>Verifies the application annotation, the presence of the {@code main} method, and delegation
+ * from that method to {@link SpringApplication#run(Class, String[])}.
  */
 class TradeFormServiceApplicationTests {
 
+    /** Verifies that the application class enables Spring Boot auto-configuration and scanning. */
     @Test
     @DisplayName("Application class should have SpringBootApplication annotation")
     void applicationClassIsSpringBootApplication() {
@@ -26,6 +28,11 @@ class TradeFormServiceApplicationTests {
                 "TradeFormServiceApplication should be annotated with @SpringBootApplication");
     }
 
+    /**
+     * Verifies that the standard Java entry-point method is present.
+     *
+     * @throws NoSuchMethodException if the expected public {@code main} method is absent
+     */
     @Test
     @DisplayName("Application class should define main method")
     void applicationDefinesMainMethod() throws NoSuchMethodException {
@@ -33,6 +40,7 @@ class TradeFormServiceApplicationTests {
         assertNotNull(mainMethod, "TradeFormServiceApplication should define a main method");
     }
 
+    /** Verifies that startup delegates to Spring Boot with the supplied arguments. */
     @Test
     @DisplayName("Main method should invoke SpringApplication.run()")
     void mainStartsSpringApplication() {

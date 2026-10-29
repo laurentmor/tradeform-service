@@ -10,16 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Spring MVC adapter for the TradeForm Service HTTP API.
+ *
+ * <p>Delegates endpoint behavior to {@link ITradeFormService} and translates invalid trade-form
+ * identifiers into a client error response.
+ */
 @RestController("basicTradeFormController")
 @Slf4j
 public class TradeFormControllerImpl implements ITradeFormController {
 
+    /** Business service that supplies the result for each API request. */
     private ITradeFormService tradeFormService;
 
     /**
-     * DefaulT constructor for TradeFormControllerImpl
+     * Creates the controller with its business-service dependency.
      *
-     * @param tradeFormService the trade form service to be used
+     * @param tradeFormService service used to perform the requested operation
      */
     public TradeFormControllerImpl(final ITradeFormService tradeFormService) {
         this.tradeFormService = tradeFormService;
@@ -29,10 +36,11 @@ public class TradeFormControllerImpl implements ITradeFormController {
     @Override
     @GetMapping("/api/tradeforms/{id}")
     /**
-     * Retrieves a TradeForm by its ID.
+     * Returns the trade-form representation for the requested identifier.
      *
-     * @param id the ID of the TradeForm to retrieve
-     * @return a ResponseEntity containing the TradeForm if found, or an appropriate error response
+     * @param id identifier supplied in the request path
+     * @return HTTP 200 with the service result, or HTTP 400 with an error body if the identifier is
+     *     invalid
      */
     public ResponseEntity<?> getTradeFormById(@PathVariable final long id) {
 
@@ -49,9 +57,9 @@ public class TradeFormControllerImpl implements ITradeFormController {
     @Override
     @GetMapping("/api")
     /**
-     * Checks the running status of the TradeForm Service.
+     * Returns the service's running-status message.
      *
-     * @return a ResponseEntity containing the status message
+     * @return HTTP 200 with the status message as plain text
      */
     public ResponseEntity<String> getRunningStatus() {
         String status = tradeFormService.getRunningStatus();

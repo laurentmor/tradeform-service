@@ -3,13 +3,10 @@ package com.lm.tradeformservice.dto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-/**
- * Tests for {@link TradeFormStatus}.
- *
- * <p>TradeFormStatusTest
- */
+/** Unit tests for the user-facing labels returned by {@link TradeFormStatus}. */
 public class TradeFormStatusTest {
-    /** */
+
+    /** Verifies the display label associated with the pending status. */
     @Test
     public void testGetDisplayNamePending() {
         TradeFormStatus status = TradeFormStatus.PENDING;
@@ -17,6 +14,7 @@ public class TradeFormStatusTest {
         Assertions.assertEquals("Pending", displayName);
     }
 
+    /** Verifies the display label associated with the approved status. */
     @Test
     public void testGetDisplayNameApproved() {
         TradeFormStatus status = TradeFormStatus.APPROVED;
@@ -24,6 +22,7 @@ public class TradeFormStatusTest {
         Assertions.assertEquals("Approved", displayName);
     }
 
+    /** Verifies the display label associated with the rejected status. */
     @Test
     public void testGetDisplayNameRejected() {
         TradeFormStatus status = TradeFormStatus.REJECTED;

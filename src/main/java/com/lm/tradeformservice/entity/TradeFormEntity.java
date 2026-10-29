@@ -13,21 +13,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+/**
+ * JPA entity representing a trade form stored in the relational database.
+ *
+ * <p>The database generates the identifier, and the status is persisted by enum name rather than
+ * ordinal. New instances default to {@link TradeFormStatus#PENDING}.
+ */
+// specify name to avoid default table name of "trade_form_entity"
+//  which is not compatible with the
+// existing database
+@Entity(name = "trade_form")
 @AllArgsConstructor
 @NoArgsConstructor(access = PROTECTED)
 @Data // Data annotation generates getters, setters, toString, equals, and hashCode methods
-/**
- * TradeFormEntity class represents the TradeForm entity in the database. It contains the ID and
- * status of the trade form.
- */
 public class TradeFormEntity {
-    /** The unique identifier for the trade form entity. */
+    /** Database-generated unique identifier; {@code null} before persistence. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
-    /** The status of the trade form entity, represented by the TradeFormStatus enum. */
+    /** Lifecycle status stored as the enum constant's name. */
     @Enumerated(EnumType.STRING)
     private TradeFormStatus status = TradeFormStatus.PENDING;
 }

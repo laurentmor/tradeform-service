@@ -72,7 +72,13 @@
 	<groupId>org.postgresql</groupId>
 	<artifactId>postgresql</artifactId>
 	<scope>runtime</scope>
-</dependency>		
+</dependency>
+<dependency>
+	<groupId>org.modelmapper</groupId>
+	<artifactId>modelmapper</artifactId>
+	<version>3.2.4</version>
+	
+</dependency>
 <dependency>
     <groupId>org.junit.platform</groupId>
     <artifactId>junit-platform-suite-engine</artifactId>

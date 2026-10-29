@@ -12,26 +12,34 @@ import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabas
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 
 /**
- * unit tests for the TradeFormRepository class.
+ * PostgreSQL-backed slice tests for {@link ITradeFormRepository}.
  *
- * <p>TradeFormRepositoryTests
+ * <p>Verifies entity insertion, retrieval, and status updates using the JPA test slice and {@link
+ * TestEntityManager}. The test uses the configured external database rather than replacing it with
+ * an embedded database.
  */
 @DataJpaTest(
         properties = {"spring.jpa.hibernate.ddl-auto=create-drop"},
         showSql = true)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TradeFormRepositoryTests {
+
+    /** Repository under test, provided by Spring Data JPA. */
     @Autowired ITradeFormRepository tradeFormRepository;
+
+    /** Entity manager helper used to confirm persisted state. */
     @Autowired TestEntityManager testEntityManager;
 
+    /** Entity created by each test and removed during cleanup. */
     TradeFormEntity testForm;
 
+    /** Removes the entity created by the test to keep the database fixture clean. */
     @AfterEach
     public void clean() {
         tradeFormRepository.delete(testForm);
     }
 
-    /** Tests the save functionality of the TradeFormRepository. */
+    /** Verifies that saving an entity assigns an ID and makes it visible to the entity manager. */
     @Test
     void testSaveTradeForm() {
         testForm = new TradeFormEntity(null, TradeFormStatus.PENDING);
@@ -43,7 +51,7 @@ public class TradeFormRepositoryTests {
                 testForm.getId());
     }
 
-    /** Tests the findById method of the TradeFormRepository. */
+    /** Verifies that a saved entity can be retrieved with its ID and status intact. */
     @Test
     void testFindById() {
         testForm = new TradeFormEntity(null, TradeFormStatus.PENDING);
@@ -58,7 +66,7 @@ public class TradeFormRepositoryTests {
         assertEquals(retrievedEntity.getStatus(), testForm.getStatus());
     }
 
-    /** Tests the update functionality of the TradeFormRepository. */
+    /** Verifies that saving a modified entity persists its updated status. */
     @Test
     void testUpdateTradeFormStatus() {
         testForm = new TradeFormEntity(null, TradeFormStatus.PENDING);

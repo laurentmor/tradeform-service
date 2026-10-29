@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import org.junit.jupiter.api.Test;
 
-/** Unit tests for the TradeFormEntity class. TradeFormEntityTests */
+/** Unit tests for {@link TradeFormEntity} construction and status values. */
 public class TradeFormEntityTests {
 
-    /** Test the creation of a TradeFormEntity with a valid ID and PENDING status. */
+    /** Verifies that an entity preserves its ID and pending status. */
     @Test
     public void testEntityCreationCorrectPending() {
         TradeFormEntity entity = new TradeFormEntity(1L, TradeFormStatus.PENDING);
@@ -16,7 +16,7 @@ public class TradeFormEntityTests {
         assertEquals(TradeFormStatus.PENDING, entity.getStatus());
     }
 
-    /** test the creation of a TradeFormEntity with a valid ID and APPROVED status. */
+    /** Verifies that an entity preserves its ID and approved status. */
     @Test
     public void testEntityCreationCorrectApproved() {
         TradeFormEntity entity = new TradeFormEntity(2L, TradeFormStatus.APPROVED);
@@ -24,7 +24,7 @@ public class TradeFormEntityTests {
         assertEquals(TradeFormStatus.APPROVED, entity.getStatus());
     }
 
-    /** Test the creation of a TradeFormEntity with a valid ID and REJECTED status. */
+    /** Verifies that an entity preserves its ID and rejected status. */
     @Test
     public void testEntityCreationCorrectRejected() {
         TradeFormEntity entity = new TradeFormEntity(3L, TradeFormStatus.REJECTED);
