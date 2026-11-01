@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +24,8 @@ public class TradeFormServiceImpl implements ITradeFormService {
 
     /** Repository available for trade-form persistence operations. */
     private final ITradeFormRepository tradeFormRepository;
+
+    private final ModelMapper tradeFormMapper;
 
     /**
      * Returns the fixed running-status message.
@@ -53,13 +56,15 @@ public class TradeFormServiceImpl implements ITradeFormService {
             }
 
             log.info("Fetching trade form with ID: {}", id);
-            return tradeFormRepository
-                    .findById(id)
-                    .map(entity -> new TradeForm(entity.getId(), entity.getStatus()))
-                    .orElseThrow(
-                            () ->
-                                    new EntityNotFoundException(
-                                            "TradeForm not found with ID: " + id));
+            TradeFormEntity entity =
+                    tradeFormRepository
+                            .findById(id)
+                            .orElseThrow(
+                                    () ->
+                                            new EntityNotFoundException(
+                                                    "TradeForm not found with ID: " + id));
+            TradeForm tradeForm = tradeFormMapper.map(entity, TradeForm.class);
+            return tradeForm;
 
         } catch (IllegalArgumentException e) {
             log.warn("Invalid TradeForm ID: {}", id);
@@ -75,8 +80,9 @@ public class TradeFormServiceImpl implements ITradeFormService {
     @Override
     public List<TradeForm> getAllTradeForms() {
         log.info("TradeFormServiceImpl.getAllTradeForms() called");
-        return tradeFormRepository.findAll().stream()
-                .map(entity -> new TradeForm(entity.getId(), entity.getStatus()))
+        List<TradeFormEntity> entities = tradeFormRepository.findAll();
+        return entities.stream()
+                .map(entity -> tradeFormMapper.map(entity, TradeForm.class))
                 .toList();
     }
 
@@ -89,8 +95,8 @@ public class TradeFormServiceImpl implements ITradeFormService {
     @Override
     public TradeForm createTradeForm(final TradeForm tradeForm) {
         log.info("TradeFormServiceImpl.createTradeForm() called with tradeForm: {}", tradeForm);
-        var entity = new TradeFormEntity(null, tradeForm.status());
-        var savedEntity = tradeFormRepository.save(entity);
-        return new TradeForm(savedEntity.getId(), savedEntity.getStatus());
+        TradeFormEntity entity = tradeFormMapper.map(tradeForm, TradeFormEntity.class);
+        entity = tradeFormRepository.save(entity);
+        return tradeFormMapper.map(entity, TradeForm.class);
     }
 }

@@ -3,6 +3,7 @@ package com.lm.tradeformservice.config;
 import static org.modelmapper.convention.MatchingStrategies.STRICT;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.record.RecordModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +26,7 @@ public class MapperConfig {
         ModelMapper modelMapper = new ModelMapper();
         // Set the matching strategy to STRICT for precise mapping between source and destination
         // objects
+        modelMapper.registerModule(new RecordModule());
 
         modelMapper.getConfiguration().setMatchingStrategy(STRICT);
 

@@ -76,8 +76,16 @@
 <dependency>
 	<groupId>org.modelmapper</groupId>
 	<artifactId>modelmapper</artifactId>
-	<version>3.2.4</version>
+	<version>3.2.6</version>
 	
+</dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/org.modelmapper/modelmapper-module-record -->
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper-module-record</artifactId>
+    <version>1.0.1</version>
+    
 </dependency>
 <dependency>
     <groupId>org.junit.platform</groupId>
