@@ -12,6 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TradeFormServiceApplication {
 
+    /** Creates the Spring Boot application entry-point object. */
+    public TradeFormServiceApplication() {}
+
     /**
      * Starts the application using the supplied command-line arguments.
      *

@@ -26,16 +26,20 @@ import org.modelmapper.ModelMapper;
 @ExtendWith(MockitoExtension.class)
 public class TradeFormServiceImplTests {
 
+    /** Mocked repository used to isolate service behavior. */
     @Mock private ITradeFormRepository tradeFormRepository;
 
+    /** Service under test. */
     private TradeFormServiceImpl tradeFormService;
 
+    /** Creates the service with a real mapper and mocked persistence boundary. */
     @BeforeEach
     void setUp() {
         ModelMapper modelMapper = new MapperConfig().modelMapper();
         tradeFormService = new TradeFormServiceImpl(tradeFormRepository, modelMapper);
     }
 
+    /** Verifies that lookup reports an absent trade form. */
     @Test
     void getTradeFormByIdThrowsWhenTradeFormDoesNotExist() {
         when(tradeFormRepository.findById(99L)).thenReturn(Optional.empty());
@@ -43,6 +47,7 @@ public class TradeFormServiceImplTests {
         assertThrows(EntityNotFoundException.class, () -> tradeFormService.getTradeFormById(99L));
     }
 
+    /** Verifies that invalid identifiers are rejected before repository access. */
     @Test
     void getTradeFormByIdDoesNotQueryRepositoryForNegativeId() {
         assertThrows(IllegalArgumentException.class, () -> tradeFormService.getTradeFormById(-1L));
@@ -50,6 +55,7 @@ public class TradeFormServiceImplTests {
         verify(tradeFormRepository, never()).findById(any());
     }
 
+    /** Verifies that all persisted entities are mapped to DTOs. */
     @Test
     void getAllTradeFormsMapsEveryEntity() {
         when(tradeFormRepository.findAll())
@@ -67,6 +73,7 @@ public class TradeFormServiceImplTests {
                 tradeForms);
     }
 
+    /** Verifies that an empty repository result becomes an empty DTO list. */
     @Test
     void getAllTradeFormsReturnsEmptyListWhenRepositoryIsEmpty() {
         when(tradeFormRepository.findAll()).thenReturn(List.of());
@@ -74,6 +81,7 @@ public class TradeFormServiceImplTests {
         assertEquals(List.of(), tradeFormService.getAllTradeForms());
     }
 
+    /** Verifies that creation maps, persists, and maps the saved entity. */
     @Test
     void createTradeFormMapsSavesAndMapsResult() {
         TradeForm requestedTradeForm = new TradeForm(0L, TradeFormStatus.REJECTED);

@@ -16,6 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MapperConfig {
 
+    /** Creates the mapper configuration component. */
+    public MapperConfig() {}
+
     /**
      * Creates the shared strict-matching {@link ModelMapper} bean.
      *

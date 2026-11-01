@@ -86,6 +86,8 @@ The GitHub Actions workflow checks formatting, then runs `clean verify` against 
 
 Local Maven lifecycle builds that reach the `test` phase (including `clean package` and `clean verify`) create a source zip named `tradeformservice-<commit-hash>.zip` at the project root. The archive excludes `target/`, `.git/`, and IDE files.
 
+Local builds that reach the `verify` phase also generate the Maven project site under `target/site/`. Site generation is automatically disabled when the `CI` environment variable is set.
+
 ## Project Structure
 
 ```text

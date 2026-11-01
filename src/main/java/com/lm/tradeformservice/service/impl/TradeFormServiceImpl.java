@@ -6,7 +6,6 @@ import com.lm.tradeformservice.repository.ITradeFormRepository;
 import com.lm.tradeformservice.service.ITradeFormService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class TradeFormServiceImpl implements ITradeFormService {
 
     /** Repository available for trade-form persistence operations. */
     private final ITradeFormRepository tradeFormRepository;
 
+    /** Mapper used to convert between persistence entities and API DTOs. */
     private final ModelMapper tradeFormMapper;
+
+    /**
+     * Creates the service with its persistence and mapping dependencies.
+     *
+     * @param tradeFormRepository repository used to persist trade forms
+     * @param tradeFormMapper mapper used to convert entities and DTOs
+     */
+    public TradeFormServiceImpl(
+            final ITradeFormRepository tradeFormRepository, final ModelMapper tradeFormMapper) {
+        this.tradeFormRepository = tradeFormRepository;
+        this.tradeFormMapper = tradeFormMapper;
+    }
 
     /**
      * Returns the fixed running-status message.

@@ -20,8 +20,7 @@ public interface ITradeFormService {
     /**
      * Gets a trade form by its identifier.
      *
-     * <p>The current implementation returns a synhetic trade form with {@code PENDING} status and
-     * does not query the repository.
+     * <p>Implementations may retrieve the form from persistence and map it to the API DTO.
      *
      * @param id non-negative trade-form identifier
      * @return trade-form response containing the requested identifier and current status
@@ -39,8 +38,9 @@ public interface ITradeFormService {
     /**
      * Creates a new trade form.
      *
-     * @param tradeForm
-     * @return
+     * @param tradeForm trade-form data to persist
+     * @return the persisted trade form, including its generated identifier
+     * @throws IllegalArgumentException if the trade-form identifier is invalid
      */
     public TradeForm createTradeForm(final TradeForm tradeForm);
 }

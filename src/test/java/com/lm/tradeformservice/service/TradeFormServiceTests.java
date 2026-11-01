@@ -38,6 +38,7 @@ public class TradeFormServiceTests {
     }
 
     /** Verifies the exact status message returned by the service. */
+    /** Verifies the exact status message returned by the service. */
     @Test
     public void testGetRunningStatus() {
         String status = tradeFormService.getRunningStatus();
