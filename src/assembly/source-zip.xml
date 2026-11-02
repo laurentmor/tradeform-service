@@ -19,6 +19,7 @@
                 <exclude>target/**</exclude>
                 <exclude>.git/**</exclude>
                 <exclude>.gitignore</exclude>
+                <exclude>.env</exclude>
                 <exclude>.idea/**</exclude>
                 <exclude>*.iml</exclude>
                 <exclude>*.zip</exclude>
