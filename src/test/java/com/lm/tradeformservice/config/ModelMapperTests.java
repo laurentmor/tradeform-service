@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class ModelMapperTests {
 
     /** Application-wide mapper configured by {@link MapperConfig}. */
-    /** Application-wide ModelMapper bean under test. */
     @Autowired private ModelMapper tradeFormMapper;
 
     /** Verifies that the application configures ModelMapper with strict matching. */

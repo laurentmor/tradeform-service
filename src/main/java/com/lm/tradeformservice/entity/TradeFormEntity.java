@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,7 +18,8 @@ import lombok.Data;
  * ordinal. New instances default to {@link TradeFormStatus#PENDING}.
  */
 // Use the existing database table name instead of the default entity-derived name.
-@Entity(name = "trade_form")
+@Table(name = "trade_form")
+@Entity
 @AllArgsConstructor
 @Data // Data annotation generates getters, setters, toString, equals, and hashCode methods
 public class TradeFormEntity {
