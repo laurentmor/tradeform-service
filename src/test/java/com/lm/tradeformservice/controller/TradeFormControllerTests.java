@@ -46,8 +46,8 @@ public class TradeFormControllerTests {
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
-              // The service mock will throw a NegativeTradeFormIdException for negative IDs
-                mockMvc =
+        // The service mock will throw a NegativeTradeFormIdException for negative IDs
+        mockMvc =
                 MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService))
                         .setControllerAdvice(new ExceptionHandlingConfig())
                         .build();
