@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/laurentmor/tradeform-service/compare/v1.2.2...v1.3.0) (2026-11-11)
+
+
+### Features
+
+* configure Global Exception handling  and refactor code to support and test it ([1c1d8aa](https://github.com/laurentmor/tradeform-service/commit/1c1d8aa04c13f99ac8036a3f84a9ec302fb822a4))
+* configure Global Exception handling  and refactor code to support and test it ([14dfdf9](https://github.com/laurentmor/tradeform-service/commit/14dfdf98505171472b44230e9b59452eaba248d5))
+
 ## [1.2.2](https://github.com/laurentmor/tradeform-service/compare/v1.2.1...v1.2.2) (2026-11-02)
 
 
