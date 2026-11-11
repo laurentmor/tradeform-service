@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/laurentmor/tradeform-service/compare/v1.2.1...v1.2.2) (2026-11-02)
+
+
+### Bug Fixes
+
+* add dev profile ([daf5057](https://github.com/laurentmor/tradeform-service/commit/daf50573477b119c92fd57911a6975078ecf238b))
+
 ## [1.2.1](https://github.com/laurentmor/tradeform-service/compare/v1.2.0...v1.2.1) (2026-10-29)
 
 
