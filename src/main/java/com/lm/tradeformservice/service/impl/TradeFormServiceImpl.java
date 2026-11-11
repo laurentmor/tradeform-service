@@ -2,9 +2,10 @@ package com.lm.tradeformservice.service.impl;
 
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.entity.TradeFormEntity;
+import com.lm.tradeformservice.exception.data.NegativeTradeFormIdException;
+import com.lm.tradeformservice.exception.data.TradeFormNotFoundException;
 import com.lm.tradeformservice.repository.ITradeFormRepository;
 import com.lm.tradeformservice.service.ITradeFormService;
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -53,34 +54,29 @@ public class TradeFormServiceImpl implements ITradeFormService {
     /**
      * Retrieves a persisted trade form for the given identifier.
      *
-     * <p>The DTO constructor validates that the identifier is non-negative.
+     * <p>The identifier is validated by the service, and the repository is queried for the
+     * corresponding persisted entity.
      *
      * @param id non-negative trade-form identifier
      * @return the persisted trade form
-     * @throws IllegalArgumentException if {@code id} is negative
+     * @throws NegativeTradeFormIdException if {@code id} is negative
+     * @throws TradeFormNotFoundException if no form has the requested identifier
      */
     @Override
     public TradeForm getTradeFormById(final long id) {
-        try {
-            if (id < 0) {
-                throw new IllegalArgumentException("TradeForm ID must be non-negative");
-            }
+        // Validate the identifier before querying the repository
+        if (id < 0) {
 
-            log.info("Fetching trade form with ID: {}", id);
-            TradeFormEntity entity =
-                    tradeFormRepository
-                            .findById(id)
-                            .orElseThrow(
-                                    () ->
-                                            new EntityNotFoundException(
-                                                    "TradeForm not found with ID: " + id));
-            TradeForm tradeForm = tradeFormMapper.map(entity, TradeForm.class);
-            return tradeForm;
-
-        } catch (IllegalArgumentException e) {
-            log.warn("Invalid TradeForm ID: {}", id);
-            throw new IllegalArgumentException("Invalid TradeForm ID");
+            throw new NegativeTradeFormIdException(id);
         }
+
+        log.info("Fetching trade form with ID: {}", id);
+        TradeFormEntity entity =
+                tradeFormRepository
+                        .findById(id)
+                        .orElseThrow(() -> new TradeFormNotFoundException(id));
+        TradeForm tradeForm = tradeFormMapper.map(entity, TradeForm.class);
+        return tradeForm;
     }
 
     /**

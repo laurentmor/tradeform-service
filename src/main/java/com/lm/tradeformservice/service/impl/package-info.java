@@ -3,9 +3,7 @@
  *
  * <p>{@link com.lm.tradeformservice.service.impl.TradeFormServiceImpl} implements {@link
  * com.lm.tradeformservice.service.ITradeFormService}. It currently returns a fixed running status
- * and constructs a synthetic pending trade form after validating the ID through the {@link
- * com.lm.tradeformservice.dto.TradeForm} constructor. The repository and mapper dependencies are
- * injected but are not yet used by these operations.
+ * and uses the repository and mapper to look up, list, and create persisted trade forms.
  *
  * <h2>Calling the service</h2>
  *
@@ -14,8 +12,9 @@
  * TradeForm form = tradeFormService.getTradeFormById(42L);
  * }</pre>
  *
- * <p>{@code getTradeFormById} returns a DTO with ID {@code 42} and status {@link
- * com.lm.tradeformservice.dto.TradeFormStatus#PENDING}. A negative ID causes {@link
- * java.lang.IllegalArgumentException} to be thrown.
+ * <p>{@code getTradeFormById} returns the persisted form with the requested ID. A negative ID
+ * causes {@link com.lm.tradeformservice.exception.data.NegativeTradeFormIdException}; an ID not
+ * found by the repository causes {@link
+ * com.lm.tradeformservice.exception.data.TradeFormNotFoundException}.
  */
 package com.lm.tradeformservice.service.impl;

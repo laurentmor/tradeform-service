@@ -20,8 +20,8 @@
  * }
  * }</pre>
  *
- * <p>The {@link com.lm.tradeformservice.dto.TradeForm} constructor rejects negative IDs with an
- * {@link java.lang.IllegalArgumentException}. Use {@link
+ * <p>The {@link com.lm.tradeformservice.dto.TradeForm} record carries data and does not validate
+ * its identifier; service operations validate identifiers when needed. Use {@link
  * com.lm.tradeformservice.dto.TradeFormStatus#getDisplayName()} when a human-readable status label
  * is needed.
  */

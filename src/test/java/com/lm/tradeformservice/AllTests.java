@@ -12,4 +12,14 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @Suite
 @SelectPackages("com.lm.tradeformservice")
 @SuiteDisplayName("Full Test Suite")
-public class AllTests {}
+public class AllTests {
+    private AllTests() {
+        // Prevent instantiation of this utility class.
+    }
+
+    private static final String SUITE_NAME = "Full Test Suite";
+
+    public static String getSuiteName() {
+        return SUITE_NAME;
+    }
+}

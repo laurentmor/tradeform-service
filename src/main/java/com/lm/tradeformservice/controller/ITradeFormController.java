@@ -14,12 +14,13 @@ public interface ITradeFormController {
     /**
      * Retrieves a trade form by its identifier.
      *
-     * <p>The current implementation constructs a synthetic {@code PENDING} response rather than
-     * loading a persisted entity. Negative identifiers result in HTTP 400.
+     * <p>The endpoint returns a persisted trade form. Negative identifiers result in HTTP 400, and
+     * identifiers that do not exist result in HTTP 404.
      *
      * @param id identifier to include in the trade-form response
-     * @return HTTP 200 with a {@link com.lm.tradeformservice.dto.TradeForm} body, or HTTP 400 with
-     *     an {@link com.lm.tradeformservice.dto.ErrorResponse} body when the identifier is invalid
+     * @return HTTP 200 with a {@link com.lm.tradeformservice.dto.TradeForm} body, HTTP 400 with an
+     *     error message when the identifier is negative, or HTTP 404 with an error message when no
+     *     trade form exists for the identifier
      */
     @GetMapping("/api/tradeforms/{id}")
     public ResponseEntity<?> getTradeFormById(@PathVariable final long id);

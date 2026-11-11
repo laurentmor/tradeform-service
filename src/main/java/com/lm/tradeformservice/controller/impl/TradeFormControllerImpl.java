@@ -1,7 +1,6 @@
 package com.lm.tradeformservice.controller.impl;
 
 import com.lm.tradeformservice.controller.ITradeFormController;
-import com.lm.tradeformservice.dto.ErrorResponse;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.service.ITradeFormService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,14 +43,12 @@ public class TradeFormControllerImpl implements ITradeFormController {
      */
     public ResponseEntity<?> getTradeFormById(@PathVariable final long id) {
 
-        try {
-            TradeForm tradeForm = tradeFormService.getTradeFormById(id);
-            log.info("TradeForm retrieved successfully for id: {}", id);
-            return ResponseEntity.ok(tradeForm);
-        } catch (IllegalArgumentException e) {
-            log.warn("Invalid TradeForm ID provided: {}", id);
-            return ResponseEntity.badRequest().body(new ErrorResponse("Invalid TradeForm ID"));
-        }
+        // Delegate to the service and return the result
+        // The service will throw an exception for invalid IDs, which is handled by the global
+        // exception handler
+        TradeForm tradeForm = tradeFormService.getTradeFormById(id);
+        log.info("TradeForm retrieved successfully for id: {}", id);
+        return ResponseEntity.ok(tradeForm);
     }
 
     @Override

@@ -24,7 +24,10 @@ public interface ITradeFormService {
      *
      * @param id non-negative trade-form identifier
      * @return trade-form response containing the requested identifier and current status
-     * @throws IllegalArgumentException if {@code id} is negative
+     * @throws com.lm.tradeformservice.exception.data.NegativeTradeFormIdException if {@code id} is
+     *     negative
+     * @throws com.lm.tradeformservice.exception.data.TradeFormNotFoundException if no form has the
+     *     requested identifier
      */
     public TradeForm getTradeFormById(final long id);
 
@@ -40,7 +43,6 @@ public interface ITradeFormService {
      *
      * @param tradeForm trade-form data to persist
      * @return the persisted trade form, including its generated identifier
-     * @throws IllegalArgumentException if the trade-form identifier is invalid
      */
     public TradeForm createTradeForm(final TradeForm tradeForm);
 }

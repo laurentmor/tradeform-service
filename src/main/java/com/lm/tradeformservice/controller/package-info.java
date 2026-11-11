@@ -28,7 +28,7 @@
  * }
  * }</pre>
  *
- * <p>A negative ID is rejected with HTTP 400 and an {@code ErrorResponse}. The trade-form route
- * currently returns a synthetic pending form rather than loading it from the database.
+ * <p>Trade forms are loaded from persistence. A negative ID returns HTTP 400, while an ID that is
+ * not found returns HTTP 404; both responses contain the exception message as plain text.
  */
 package com.lm.tradeformservice.controller;

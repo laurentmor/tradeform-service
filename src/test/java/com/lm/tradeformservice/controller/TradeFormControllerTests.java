@@ -7,9 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.lm.tradeformservice.TradeFormServiceApplication;
+import com.lm.tradeformservice.config.ExceptionHandlingConfig;
 import com.lm.tradeformservice.controller.impl.TradeFormControllerImpl;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
+import com.lm.tradeformservice.exception.data.NegativeTradeFormIdException;
 import com.lm.tradeformservice.service.ITradeFormService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,8 +46,10 @@ public class TradeFormControllerTests {
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
-        mockMvc =
+              // The service mock will throw a NegativeTradeFormIdException for negative IDs
+                mockMvc =
                 MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService))
+                        .setControllerAdvice(new ExceptionHandlingConfig())
                         .build();
     }
 
@@ -62,18 +66,18 @@ public class TradeFormControllerTests {
     }
 
     /**
-     * Verifies that a negative identifier is translated to HTTP 400 with an error JSON body.
+     * Verifies that a negative identifier is translated to HTTP 400 with the exception message.
      *
      * @throws Exception if the MockMvc request fails
      */
     @Test
     void testNegativeId() throws Exception {
         when(tradeFormService.getTradeFormById(-1))
-                .thenThrow(new IllegalArgumentException("Invalid TradeForm ID"));
+                .thenThrow(new NegativeTradeFormIdException(-1L));
 
         mockMvc.perform(get("/api/tradeforms/-1"))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().json("{\"message\":\"Invalid TradeForm ID\"}"));
+                .andExpect(content().string("Trade form ID cannot be negative: -1"));
     }
 
     /**
@@ -86,5 +90,17 @@ public class TradeFormControllerTests {
         mockMvc.perform(get("/api/tradeforms/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":1,\"status\":\"PENDING\"}"));
+    }
+
+    @Test
+    void testGetTradeFormByIdNotFound() throws Exception {
+        when(tradeFormService.getTradeFormById(999L))
+                .thenThrow(
+                        new com.lm.tradeformservice.exception.data.TradeFormNotFoundException(
+                                999L));
+
+        mockMvc.perform(get("/api/tradeforms/999"))
+                .andExpect(status().isNotFound())
+                .andExpect(content().string("Trade form with ID 999 not found."));
     }
 }

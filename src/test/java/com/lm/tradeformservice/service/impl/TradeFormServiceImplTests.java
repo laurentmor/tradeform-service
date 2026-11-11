@@ -11,8 +11,9 @@ import com.lm.tradeformservice.config.MapperConfig;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.entity.TradeFormEntity;
+import com.lm.tradeformservice.exception.data.NegativeTradeFormIdException;
+import com.lm.tradeformservice.exception.data.TradeFormNotFoundException;
 import com.lm.tradeformservice.repository.ITradeFormRepository;
-import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,13 +45,15 @@ public class TradeFormServiceImplTests {
     void getTradeFormByIdThrowsWhenTradeFormDoesNotExist() {
         when(tradeFormRepository.findById(99L)).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> tradeFormService.getTradeFormById(99L));
+        assertThrows(
+                TradeFormNotFoundException.class, () -> tradeFormService.getTradeFormById(99L));
     }
 
     /** Verifies that invalid identifiers are rejected before repository access. */
     @Test
     void getTradeFormByIdDoesNotQueryRepositoryForNegativeId() {
-        assertThrows(IllegalArgumentException.class, () -> tradeFormService.getTradeFormById(-1L));
+        assertThrows(
+                NegativeTradeFormIdException.class, () -> tradeFormService.getTradeFormById(-1L));
 
         verify(tradeFormRepository, never()).findById(any());
     }

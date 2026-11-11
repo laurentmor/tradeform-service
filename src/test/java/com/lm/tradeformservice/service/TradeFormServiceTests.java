@@ -3,6 +3,7 @@ package com.lm.tradeformservice.service;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.entity.TradeFormEntity;
+import com.lm.tradeformservice.exception.data.NegativeTradeFormIdException;
 import com.lm.tradeformservice.repository.ITradeFormRepository;
 import com.lm.tradeformservice.service.impl.TradeFormServiceImpl;
 import org.junit.jupiter.api.AfterEach;
@@ -60,7 +61,7 @@ public class TradeFormServiceTests {
     public void testGetTradeFormByNegativeId() {
         int negativeId = -1;
         Assertions.assertThrows(
-                IllegalArgumentException.class,
+                NegativeTradeFormIdException.class,
                 () -> tradeFormService.getTradeFormById(negativeId));
     }
 }
