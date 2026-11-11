@@ -28,7 +28,7 @@ public class ExceptionHandlingConfig {
     @ExceptionHandler(TradeFormNotFoundException.class)
     public ResponseEntity<Object> handleTradeFormNotFoundException(TradeFormNotFoundException ex) {
         // Handle the TradeFormNotFoundException and return an appropriate response
-        log.error("TradeFormNotFoundException: {}", ex.getMessage());
+        log.warn("TradeFormNotFoundException: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 

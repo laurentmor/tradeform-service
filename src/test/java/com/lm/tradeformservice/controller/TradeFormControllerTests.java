@@ -6,19 +6,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.lm.tradeformservice.TradeFormServiceApplication;
 import com.lm.tradeformservice.config.ExceptionHandlingConfig;
 import com.lm.tradeformservice.controller.impl.TradeFormControllerImpl;
 import com.lm.tradeformservice.dto.TradeForm;
 import com.lm.tradeformservice.dto.TradeFormStatus;
 import com.lm.tradeformservice.exception.data.NegativeTradeFormIdException;
+import com.lm.tradeformservice.exception.data.TradeFormNotFoundException;
 import com.lm.tradeformservice.service.ITradeFormService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
  * MVC tests for {@link TradeFormControllerImpl}.
@@ -26,31 +27,23 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
  * <p>Uses a mocked {@link ITradeFormService} and standalone MockMvc to verify the status endpoint,
  * successful trade-form JSON response, and HTTP 400 response for invalid identifiers.
  */
-@SpringBootTest(classes = TradeFormServiceApplication.class)
+@WebMvcTest(controllers = TradeFormControllerImpl.class)
+@Import(ExceptionHandlingConfig.class)
 public class TradeFormControllerTests {
 
     /** Mock MVC dispatcher configured for the controller under test. */
-    private MockMvc mockMvc;
+    @Autowired private MockMvc mockMvc;
 
     /** Mock service used to isolate HTTP behavior from business logic. */
     @MockitoBean private ITradeFormService tradeFormService;
 
-    /**
-     * Resets the service mock, stubs expected behavior, and builds the standalone MVC fixture.
-     *
-     * @throws Exception if MockMvc setup fails
-     */
+    /** Resets the service mock and stubs the expected successful responses. */
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         reset(tradeFormService);
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
-        // The service mock will throw a NegativeTradeFormIdException for negative IDs
-        mockMvc =
-                MockMvcBuilders.standaloneSetup(new TradeFormControllerImpl(tradeFormService))
-                        .setControllerAdvice(new ExceptionHandlingConfig())
-                        .build();
     }
 
     /**
@@ -95,9 +88,7 @@ public class TradeFormControllerTests {
     @Test
     void testGetTradeFormByIdNotFound() throws Exception {
         when(tradeFormService.getTradeFormById(999L))
-                .thenThrow(
-                        new com.lm.tradeformservice.exception.data.TradeFormNotFoundException(
-                                999L));
+                .thenThrow(new TradeFormNotFoundException(999L));
 
         mockMvc.perform(get("/api/tradeforms/999"))
                 .andExpect(status().isNotFound())
