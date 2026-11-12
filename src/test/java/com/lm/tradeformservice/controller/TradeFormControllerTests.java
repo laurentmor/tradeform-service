@@ -1,6 +1,5 @@
 package com.lm.tradeformservice.controller;
 
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,9 +23,10 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * MVC tests for {@link TradeFormControllerImpl}.
  *
- * <p>Uses Spring's WebMvcTest infrastructure with a mocked service to verify
- * HTTP responses and centralized exception handling.
- */@WebMvcTest(controllers = TradeFormControllerImpl.class)
+ * <p>Uses Spring's WebMvcTest infrastructure with a mocked service to verify HTTP responses and
+ * centralized exception handling.
+ */
+@WebMvcTest(controllers = TradeFormControllerImpl.class)
 @Import(ExceptionHandlingConfig.class)
 public class TradeFormControllerTests {
 
@@ -39,7 +39,7 @@ public class TradeFormControllerTests {
     /** Resets the service mock and stubs the expected successful responses. */
     @BeforeEach
     public void setUp() {
-        
+
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
