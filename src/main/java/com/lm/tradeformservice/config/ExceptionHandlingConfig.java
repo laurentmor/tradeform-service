@@ -43,7 +43,7 @@ public class ExceptionHandlingConfig {
     public ResponseEntity<Object> handleNegativeTradeFormIdException(
             NegativeTradeFormIdException ex) {
         // Handle the NegativeTradeFormIdException and return an appropriate response
-        log.error("NegativeTradeFormIdException: {}", ex.getMessage());
+        log.warn("NegativeTradeFormIdException: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }

@@ -24,10 +24,9 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * MVC tests for {@link TradeFormControllerImpl}.
  *
- * <p>Uses a mocked {@link ITradeFormService} and standalone MockMvc to verify the status endpoint,
- * successful trade-form JSON response, and HTTP 400 response for invalid identifiers.
- */
-@WebMvcTest(controllers = TradeFormControllerImpl.class)
+ * <p>Uses Spring's WebMvcTest infrastructure with a mocked service to verify
+ * HTTP responses and centralized exception handling.
+ */@WebMvcTest(controllers = TradeFormControllerImpl.class)
 @Import(ExceptionHandlingConfig.class)
 public class TradeFormControllerTests {
 
@@ -40,7 +39,7 @@ public class TradeFormControllerTests {
     /** Resets the service mock and stubs the expected successful responses. */
     @BeforeEach
     public void setUp() {
-        reset(tradeFormService);
+        
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
