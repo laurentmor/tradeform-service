@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/laurentmor/tradeform-service/compare/v1.3.0...v1.3.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* transformed test in pure WebMVC ([e3e59d3](https://github.com/laurentmor/tradeform-service/commit/e3e59d33dafa1a9d51363e388f9d7841717354a5))
+
 ## [1.3.0](https://github.com/laurentmor/tradeform-service/compare/v1.2.2...v1.3.0) (2026-11-11)
 
 
