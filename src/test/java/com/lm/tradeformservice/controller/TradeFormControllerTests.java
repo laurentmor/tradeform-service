@@ -30,6 +30,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @Import(ExceptionHandlingConfig.class)
 public class TradeFormControllerTests {
 
+    /** Creates the MVC test fixture. */
+    public TradeFormControllerTests() {}
+
     /** Mock MVC dispatcher configured for the controller under test. */
     @Autowired private MockMvc mockMvc;
 
@@ -39,7 +42,6 @@ public class TradeFormControllerTests {
     /** Resets the service mock and stubs the expected successful responses. */
     @BeforeEach
     public void setUp() {
-
         when(tradeFormService.getRunningStatus()).thenReturn("TradeForm Service is running");
         when(tradeFormService.getTradeFormById(1L))
                 .thenReturn(new TradeForm(1L, TradeFormStatus.PENDING));
@@ -84,6 +86,11 @@ public class TradeFormControllerTests {
                 .andExpect(content().json("{\"id\":1,\"status\":\"PENDING\"}"));
     }
 
+    /**
+     * Verifies that an identifier absent from persistence is translated to HTTP 404.
+     *
+     * @throws Exception if the MockMvc request fails
+     */
     @Test
     void testGetTradeFormByIdNotFound() throws Exception {
         when(tradeFormService.getTradeFormById(999L))

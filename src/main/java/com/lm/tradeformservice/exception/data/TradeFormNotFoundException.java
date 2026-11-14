@@ -1,11 +1,16 @@
 package com.lm.tradeformservice.exception.data;
 
 /**
- * This exception is thrown when a trade form with a specified ID is not found in the database.
- * TradeFormNotFoundException
+ * Indicates that no persisted trade form exists for the requested identifier.
+ *
+ * <p>The HTTP exception handler maps this exception to a {@code 404 Not Found} response.
  */
 public final class TradeFormNotFoundException extends RuntimeException {
-    /** Constructs a new exception with a message indicating the missing trade form ID. */
+    /**
+     * Creates an exception describing the identifier that was not found.
+     *
+     * @param id the missing trade-form identifier
+     */
     public TradeFormNotFoundException(final Long id) {
         super("Trade form with ID " + id + " not found.");
     }

@@ -12,8 +12,8 @@
  * <h2>Calling the controller over HTTP</h2>
  *
  * <pre>{@code
- * curl -i http://localhost:8080/api/tradeforms/7
- * curl -i http://localhost:8080/api/tradeforms/-1
+ * curl -i http://localhost:9090/api/tradeforms/7
+ * curl -i http://localhost:9090/api/tradeforms/-1
  * }</pre>
  *
  * <p>The first request returns the matching persisted trade form. The second returns a bad-request

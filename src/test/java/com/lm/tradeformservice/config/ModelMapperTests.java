@@ -15,6 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class ModelMapperTests {
 
+    /** Creates the test fixture. */
+    public ModelMapperTests() {}
+
     /** Application-wide mapper configured by {@link MapperConfig}. */
     @Autowired private ModelMapper tradeFormMapper;
 

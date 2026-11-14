@@ -3,7 +3,7 @@
  *
  * <p>{@link com.lm.tradeformservice.dto.TradeForm} is the response representation of a trade form,
  * {@link com.lm.tradeformservice.dto.TradeFormStatus} defines its supported lifecycle statuses, and
- * {@link com.lm.tradeformservice.dto.ErrorResponse} carries a client-facing error message.
+ * {@link com.lm.tradeformservice.dto.ErrorResponse} models a client-facing error message.
  *
  * <h2>Creating a response DTO</h2>
  *
@@ -21,7 +21,8 @@
  * }</pre>
  *
  * <p>The {@link com.lm.tradeformservice.dto.TradeForm} record carries data and does not validate
- * its identifier; service operations validate identifiers when needed. Use {@link
+ * its identifier; service operations validate identifiers when needed. Current exception responses
+ * return their messages as plain text. Use {@link
  * com.lm.tradeformservice.dto.TradeFormStatus#getDisplayName()} when a human-readable status label
  * is needed.
  */

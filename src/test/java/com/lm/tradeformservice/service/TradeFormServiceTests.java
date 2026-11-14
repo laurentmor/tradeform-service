@@ -17,6 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class TradeFormServiceTests {
 
+    /** Creates the service integration-test fixture. */
+    public TradeFormServiceTests() {}
+
     /** Service implementation wired by the application context. */
     @Autowired private TradeFormServiceImpl tradeFormService;
 

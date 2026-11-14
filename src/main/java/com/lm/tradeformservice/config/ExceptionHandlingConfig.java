@@ -9,35 +9,35 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * This class is a configuration class for handling exceptions in the trade form service. It is
- * annotated with {@code @ControllerAdvice}, which allows it to handle exceptions across the entire
- * application. Additionally, it can be used to define global exception handling logic, such as
- * mapping specific exceptions to HTTP response codes or custom error messages.
- * ExceptionHandlingConfig
+ * Maps trade-form domain exceptions to HTTP responses across the application.
+ *
+ * <p>Missing trade forms produce HTTP 404 responses and negative identifiers produce HTTP 400
+ * responses. Both response bodies contain the exception message as plain text.
  */
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandlingConfig {
+
+    /** Creates the global trade-form exception handler. */
+    public ExceptionHandlingConfig() {}
+
     /**
-     * Handles the TradeFormNotFoundException and returns a ResponseEntity with a NOT_FOUND status.
-     * This method is annotated with {@code @ExceptionHandler}, which allows it to handle
+     * Converts a missing trade-form exception to an HTTP 404 response.
      *
-     * @param ex the TradeFormNotFoundException that was thrown.
-     * @return a ResponseEntity containing the error message and a NOT_FOUND status.
+     * @param ex the exception describing the missing trade form
+     * @return HTTP 404 with the exception message as plain text
      */
     @ExceptionHandler(TradeFormNotFoundException.class)
     public ResponseEntity<Object> handleTradeFormNotFoundException(TradeFormNotFoundException ex) {
-        // Handle the TradeFormNotFoundException and return an appropriate response
         log.warn("TradeFormNotFoundException: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     /**
-     * Handles the NegativeTradeFormIdException and returns a ResponseEntity with a BAD_REQUEST
-     * status. This method is annotated with {@code @ExceptionHandler}, which allows it to handle
+     * Converts an invalid negative identifier exception to an HTTP 400 response.
      *
-     * @param ex the NegativeTradeFormIdException that was thrown.
-     * @return a ResponseEntity containing the error message and a BAD_REQUEST status.
+     * @param ex the exception describing the invalid identifier
+     * @return HTTP 400 with the exception message as plain text
      */
     @ExceptionHandler(NegativeTradeFormIdException.class)
     public ResponseEntity<Object> handleNegativeTradeFormIdException(

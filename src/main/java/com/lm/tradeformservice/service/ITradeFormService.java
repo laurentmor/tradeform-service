@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * Business-operation contract for TradeForm Service.
  *
- * <p>Implementations are responsible for the status and trade-form lookup operations used by the
- * HTTP layer.
+ * <p>Implementations provide the service status and operations for looking up, listing, and
+ * creating persisted trade forms.
  */
 public interface ITradeFormService {
     /**
@@ -20,7 +20,7 @@ public interface ITradeFormService {
     /**
      * Gets a trade form by its identifier.
      *
-     * <p>Implementations may retrieve the form from persistence and map it to the API DTO.
+     * <p>Implementations retrieve the form from persistence and map it to the API DTO.
      *
      * @param id non-negative trade-form identifier
      * @return trade-form response containing the requested identifier and current status
@@ -32,17 +32,17 @@ public interface ITradeFormService {
     public TradeForm getTradeFormById(final long id);
 
     /**
-     * Gets all trade forms.
+     * Gets all persisted trade forms.
      *
-     * @return a list of all trade forms
+     * @return all persisted trade forms, or an empty list when none exist
      */
     public List<TradeForm> getAllTradeForms();
 
     /**
-     * Creates a new trade form.
+     * Persists a new trade form.
      *
      * @param tradeForm trade-form data to persist
-     * @return the persisted trade form, including its generated identifier
+     * @return the saved trade form, including its persistence-generated identifier
      */
     public TradeForm createTradeForm(final TradeForm tradeForm);
 }

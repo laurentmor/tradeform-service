@@ -14,7 +14,7 @@
  * ./mvnw spring-boot:run
  * }</pre>
  *
- * <p>On Windows, use {@code .\mvnw.cmd spring-boot:run}. The HTTP API listens on port 8080 by
- * default.
+ * <p>On Windows, use {@code .\mvnw.cmd spring-boot:run}. The configured HTTP port is 9090; it can
+ * be overridden with the {@code server.port} property.
  */
 package com.lm.tradeformservice;

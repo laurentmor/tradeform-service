@@ -24,6 +24,9 @@ import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class TradeFormRepositoryTests {
 
+    /** Creates the repository test fixture. */
+    public TradeFormRepositoryTests() {}
+
     /** Repository under test, provided by Spring Data JPA. */
     @Autowired ITradeFormRepository tradeFormRepository;
 

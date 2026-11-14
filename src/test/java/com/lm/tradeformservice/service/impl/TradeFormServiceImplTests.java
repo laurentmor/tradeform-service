@@ -23,9 +23,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-/** Unit tests for the service implementation's repository and mapping behavior. */
+/**
+ * Unit tests for {@link TradeFormServiceImpl} repository access, identifier validation, and DTO
+ * mapping behavior.
+ */
 @ExtendWith(MockitoExtension.class)
 public class TradeFormServiceImplTests {
+
+    /** Creates the service test fixture. */
+    public TradeFormServiceImplTests() {}
 
     /** Mocked repository used to isolate service behavior. */
     @Mock private ITradeFormRepository tradeFormRepository;

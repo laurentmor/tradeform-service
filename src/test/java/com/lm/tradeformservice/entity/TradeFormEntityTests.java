@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 /** Unit tests for {@link TradeFormEntity} construction and status values. */
 public class TradeFormEntityTests {
 
+    /** Creates the entity test fixture. */
+    public TradeFormEntityTests() {}
+
     /** Verifies that an entity preserves its ID and pending status. */
     @Test
     public void testEntityCreationCorrectPending() {

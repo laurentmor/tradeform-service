@@ -18,7 +18,7 @@
  * tradeFormRepository.deleteById(saved.getId());
  * }</pre>
  *
- * <p>These operations require a configured and reachable relational database. The current REST
- * service does not yet use this repository to serve its trade-form GET endpoint.
+ * <p>The service layer uses this repository for trade-form lookup, listing, and persistence.
+ * Operations require a configured and reachable relational database.
  */
 package com.lm.tradeformservice.repository;

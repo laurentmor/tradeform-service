@@ -15,8 +15,8 @@
  * <h2>Request example</h2>
  *
  * <pre>{@code
- * curl http://localhost:8080/api
- * curl http://localhost:8080/api/tradeforms/42
+ * curl http://localhost:9090/api
+ * curl http://localhost:9090/api/tradeforms/42
  * }</pre>
  *
  * <p>A successful trade-form request currently returns JSON such as:

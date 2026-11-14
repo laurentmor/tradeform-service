@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 /** Unit tests for the user-facing labels returned by {@link TradeFormStatus}. */
 public class TradeFormStatusTest {
 
+    /** Creates the status test fixture. */
+    public TradeFormStatusTest() {}
+
     /** Verifies the display label associated with the pending status. */
     @Test
     public void testGetDisplayNamePending() {

@@ -80,9 +80,9 @@ public class TradeFormServiceImpl implements ITradeFormService {
     }
 
     /**
-     * (non-Javadoc)
+     * Retrieves and maps all persisted trade forms.
      *
-     * @see com.lm.tradeformservice.service.ITradeFormService#getAllTradeForms()
+     * @return the mapped trade forms, or an empty list when the repository has no records
      */
     @Override
     public List<TradeForm> getAllTradeForms() {
@@ -94,10 +94,10 @@ public class TradeFormServiceImpl implements ITradeFormService {
     }
 
     /**
-     * (non-Javadoc)
+     * Maps the supplied DTO to an entity, persists it, and maps the saved entity back to a DTO.
      *
-     * @see
-     *     com.lm.tradeformservice.service.ITradeFormService#createTradeForm(com.lm.tradeformservice.dto.TradeForm)
+     * @param tradeForm the trade-form data to persist
+     * @return the saved trade form with its persistence-generated identifier
      */
     @Override
     public TradeForm createTradeForm(final TradeForm tradeForm) {
